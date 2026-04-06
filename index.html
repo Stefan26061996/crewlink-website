@@ -68,7 +68,7 @@
             justify-content: flex-start;
         }
 
-        .download-button-placeholder {
+        .download-btn {
             display: inline-block;
             background: #193175;
             color: white;
@@ -79,16 +79,16 @@
             transition: transform 0.2s, background 0.2s;
         }
 
-        .download-button-placeholder:hover {
+        .download-btn:hover {
             transform: translateY(-2px);
             background: #2563eb;
         }
 
         .carousel-container {
             position: relative;
-            max-width: 100%;
+            max-width: 1200px;
             margin: 40px auto;
-            padding: 0 40px;
+            padding: 0 20px;
         }
 
         .carousel {
@@ -142,6 +142,15 @@
         .feature p {
             font-size: 1.2em;
             font-weight: normal;
+        }
+
+        .feature a {
+            color: #193175;
+            text-decoration: none;
+        }
+
+        .feature a:hover {
+            text-decoration: underline;
         }
 
         .footer {
@@ -203,13 +212,13 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <img src="images/logo.png" alt="Crew Link Logo" class="app-icon">
+            <img src="app_icon_foreground.png" alt="Crew Link Logo" class="app-icon">
             <div class="app-info">
                 <h1 class="app-title">Crew Link</h1>
                 <p class="app-description">Deine Crew. Immer verbunden. – Veranstalter, Techniker, DJs, VJs und Equipment-Anbieter vernetzen. Termine koordinieren, Equipment teilen, zusammenhalten.</p>
                 <div class="download-buttons">
-                    <a href="#" class="download-button-placeholder">📱 App Store (kommt bald)</a>
-                    <a href="#" class="download-button-placeholder">📲 Google Play (kommt bald)</a>
+                    <a href="#" class="download-btn">📱 App Store (kommt bald)</a>
+                    <a href="#" class="download-btn">📲 Google Play (kommt bald)</a>
                 </div>
             </div>
         </div>
@@ -218,37 +227,35 @@
     <section class="carousel-container">
         <div class="carousel">
             <div class="carousel-item">
-                <img src="images/screenshot-1.jpg" alt="App Screenshot 1">
+                <img src="Screenshot_20260406-145937.jpg" alt="App Screenshot 1">
             </div>
             <div class="carousel-item">
-                <img src="images/screenshot-2.jpg" alt="App Screenshot 2">
+                <img src="Screenshot_20260406-150004.jpg" alt="App Screenshot 2">
             </div>
             <div class="carousel-item">
-                <img src="images/screenshot-3.jpg" alt="App Screenshot 3">
+                <img src="Screenshot_20260405-150011.jpg" alt="App Screenshot 3">
             </div>
         </div>
     </section>
 
     <section class="features">
-        <div class="container">
-            <div class="feature">
-                <h2>Features</h2>
-                <p>• 📅 Terminplanung & Koordination</p>
-                <p>• 💬 Gruppen-Chat & Umfragen</p>
-                <p>• 📎 Equipment-Inserate & Vermietung</p>
-                <p>• 📍 Umkreis-Filter für Events</p>
-                <p>• 🔔 Push-Benachrichtigungen</p>
-            </div>
+        <div class="feature">
+            <h2>Features</h2>
+            <p>• 📅 Terminplanung & Koordination</p>
+            <p>• 💬 Gruppen-Chat & Umfragen</p>
+            <p>• 📎 Equipment-Inserate & Vermietung</p>
+            <p>• 📍 Umkreis-Filter für Events</p>
+            <p>• 🔔 Push-Benachrichtigungen</p>
+        </div>
 
-            <div class="feature">
-                <h2>Datenschutz</h2>
-                <p>Deine Daten sind bei uns sicher. Wir speichern deine Daten DSGVO-konform und geben sie nicht ohne deine Einwilligung weiter. <a href="datenschutz.html">Mehr erfahren</a></p>
-            </div>
+        <div class="feature">
+            <h2>Datenschutz</h2>
+            <p>Deine Daten sind bei uns sicher. Wir speichern deine Daten DSGVO-konform und geben sie nicht ohne deine Einwilligung weiter. <a href="datenschutz.html">Mehr erfahren</a></p>
+        </div>
 
-            <div class="feature">
-                <h2>Kontakt</h2>
-                <p>Hast du Fragen oder Feedback? Schreib uns einfach eine E-Mail an: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a></p>
-            </div>
+        <div class="feature">
+            <h2>Kontakt</h2>
+            <p>Hast du Fragen oder Feedback? Schreib uns einfach eine E-Mail an: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a></p>
         </div>
     </section>
 
