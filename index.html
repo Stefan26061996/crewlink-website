@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crew Link - Die App für deine Crew. Veranstalter, Techniker, DJs, VJs und Equipment-Anbieter vernetzen. Termine koordinieren, Equipment teilen, zusammenhalten.">
+    <meta name="keywords" content="Crew, Veranstaltung, Techniker, DJ, VJ, Equipment, Vermietung, Terminplanung">
+    <title>Crew Link - Deine Crew. Immer verbunden.</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+            text-align: left;
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .app-icon {
+            width: 220px;
+            height: 220px;
+            border-radius: 45px;
+            margin: 0;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+        }
+
+        .app-title {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .app-description {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: normal;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .download-button-placeholder {
+            display: inline-block;
+            background: #1f2937;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .download-button-placeholder:hover {
+            transform: translateY(-2px);
+            background: #2563eb;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease-in-out;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 20px 0;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            min-width: calc(33.333% - 14px);
+            scroll-snap-align: start;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Features section */
+        .features {
+            padding: 40px 20px;
+            background: #f8f9fa;
+        }
+
+        .feature {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .feature h2 {
+            font-size: 2em;
+            font-weight: normal;
+            margin-bottom: 15px;
+            color: #2563eb;
+        }
+
+        .feature p {
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .app-icon {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
+            }
+
+            .download-buttons {
+                justify-content: center;
+            }
+
+            .carousel-item {
+                min-width: calc(100% - 40px);
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .carousel-item {
+                min-width: calc(50% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="app-icon">👥</div>
+            <div class="app-info">
+                <h1 class="app-title">Crew Link</h1>
+                <p class="app-description">Deine Crew. Immer verbunden. – Veranstalter, Techniker, DJs, VJs und Equipment-Anbieter vernetzen. Termine koordinieren, Equipment teilen, zusammenhalten.</p>
+                <div class="download-buttons">
+                    <a href="#" class="download-button-placeholder">📱 App Store (kommt bald)</a>
+                    <a href="#" class="download-button-placeholder">📲 Google Play (kommt bald)</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="images/screenshot-1.jpg" alt="App Screenshot 1" onerror="this.src='https://placehold.co/400x800/eef2ff/2563eb?text=Screenshot+1'">
+            </div>
+            <div class="carousel-item">
+                <img src="images/screenshot-2.jpg" alt="App Screenshot 2" onerror="this.src='https://placehold.co/400x800/eef2ff/2563eb?text=Screenshot+2'">
+            </div>
+            <div class="carousel-item">
+                <img src="images/screenshot-3.jpg" alt="App Screenshot 3" onerror="this.src='https://placehold.co/400x800/eef2ff/2563eb?text=Screenshot+3'">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <h2>Features</h2>
+                <p>• 📅 Terminplanung & Koordination</p>
+                <p>• 💬 Gruppen-Chat & Umfragen</p>
+                <p>• 📎 Equipment-Inserate & Vermietung</p>
+                <p>• 📍 Umkreis-Filter für Events</p>
+                <p>• 🔔 Push-Benachrichtigungen</p>
+            </div>
+
+            <div class="feature">
+                <h2>Datenschutz</h2>
+                <p>Deine Daten sind bei uns sicher. Wir speichern deine Daten DSGVO-konform und geben sie nicht ohne deine Einwilligung weiter. <a href="datenschutz.html">Mehr erfahren</a></p>
+            </div>
+
+            <div class="feature">
+                <h2>Kontakt</h2>
+                <p>Hast du Fragen oder Feedback? Schreib uns einfach eine E-Mail an: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="impressum.html">Impressum</a> |
+            <a href="datenschutz.html">Datenschutzerklärung</a> |
+            <a href="agb.html">AGB</a>
+        </div>
+        <div>
+            <p>&copy; 2026 Crew Link - Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            
+            // Touch support for carousel
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            if (carousel) {
+                carousel.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+
+                carousel.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchStartX - touchEndX > 50) {
+                        carousel.scrollBy({ left: 300, behavior: 'smooth' });
+                    } else if (touchEndX - touchStartX > 50) {
+                        carousel.scrollBy({ left: -300, behavior: 'smooth' });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
