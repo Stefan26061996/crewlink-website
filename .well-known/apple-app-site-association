@@ -1,5 +1,14 @@
 {
   "webcredentials": {
     "apps": ["NLBVR6J4KB.com.crewlink.eventify"]
+  },
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "NLBVR6J4KB.com.crewlink.eventify",
+        "paths": ["/@*", "/events/*", "/listings/*"]
+      }
+    ]
   }
 }
