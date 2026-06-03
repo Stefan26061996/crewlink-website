@@ -366,7 +366,7 @@
 			color: var(--text-primary-color);
 
 			margin: 16px 0px;
-			padding: 8px 24px;
+			padding: 8px 28px;
 			background: oklch(from var(--page-background) calc(l * 0.8) c h);
 
 			display: inline-block;
