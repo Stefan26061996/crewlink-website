@@ -15,19 +15,19 @@ const routes: RouteRecordRaw[] = [
 		path: '/impressum.html',
 		name: 'imprint',
 		component: () => import('../views/ImprintView.vue'),
-		meta: { title: 'Impressum - Crew Link' },
+		meta: { title: 'Impressum - Crewlink' },
 	},
 	{
 		path: '/datenschutz.html',
 		name: 'privacy-policy',
 		component: () => import('../views/PrivacyPolicyView.vue'),
-		meta: { title: 'Datenschutzerklärung - Crew Link' },
+		meta: { title: 'Datenschutzerklärung - Crewlink' },
 	},
 	{
 		path: '/agb.html',
 		name: 'terms',
 		component: () => import('../views/TermsView.vue'),
-		meta: { title: 'AGB - Allgemeine Geschäftsbedingungen - Crew Link' },
+		meta: { title: 'AGB - Allgemeine Geschäftsbedingungen - Crewlink' },
 	},
 	{
 		path: '/daten-loeschen.html',
@@ -39,19 +39,19 @@ const routes: RouteRecordRaw[] = [
 		path: '/@:username',
 		name: 'deep-link-profile',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink' },
+		meta: { title: 'Crewlink', deepLink: true },
 	},
 	{
 		path: '/events/:id',
 		name: 'deep-link-event',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink' },
+		meta: { title: 'Crewlink', deepLink: true },
 	},
 	{
 		path: '/listings/:id',
 		name: 'deep-link-listing',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink' },
+		meta: { title: 'Crewlink', deepLink: true },
 	},
 	{
 		path: '/index.html',
@@ -61,7 +61,7 @@ const routes: RouteRecordRaw[] = [
 		path: '/open.html',
 		name: 'open-html',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink' },
+		meta: { title: 'Crewlink', deepLink: true, },
 	},
 ]
 

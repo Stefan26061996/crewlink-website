@@ -1,5 +1,5 @@
 <template>
-	<header class="main-header" v-if="!isHome">
+	<header :class="['main-header', { bordered: !isDeepLink }]" v-if="!isHome">
 		<div class="max-width">
 			<div class="logo">
 				<router-link :to="{ name: 'home' }"><img src="/images/logo-white.svg" alt="Crewlink" /></router-link>
@@ -26,11 +26,16 @@
 </template>
 
 <script setup lang="ts">
-	import { computed } from 'vue'
+	import { computed, onMounted } from 'vue'
 	import { RouterView, useRoute } from 'vue-router'
 
 	const $route = useRoute()
 	const isHome = computed(() => $route.name === 'home')
+	const isDeepLink = computed(() => $route.meta.deepLink === true)
+
+	onMounted(() => {
+		console.log('$route', $route)
+	})
 </script>
 
 <style>
@@ -40,7 +45,7 @@
 	:root {
 		--primary-color: #1A237E;
 		--page-background: #1B2480;
-		--text-primary-color: color-mix(#ffffff 85%, var(--primary-color));
+		--text-primary-color: color-mix(#ffffff 90%, var(--primary-color));
 		--text-secondary-color: #A1A7E6;
 
 		--size-text-main: 1rem;
@@ -49,6 +54,11 @@
 		--size-text-huge: 2rem;
 
 		--container-border-radius: 12px;
+		--container-border-color: oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.67) h);
+	}
+
+	html, body {
+		min-height: 100%;
 	}
 
 	body {
@@ -88,6 +98,8 @@
 	}
 
 	#app {
+		display: flex;
+		flex-direction: column;
 		min-height: 100vh;
 	}
 
@@ -126,7 +138,12 @@
 
 	.main-header {
 		padding: 32px 20px;
-		border-bottom: 1px solid oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.67) h);
+		padding-bottom: 0px;
+
+		&.bordered {
+			border-bottom: 1px solid var(--container-border-color);
+			padding-bottom: 32px;
+		}
 
 		.logo {
 
@@ -225,8 +242,10 @@
 		.content {
 			display: flex;
 			justify-content: space-between;
+			padding-left: 20px;
+			padding-right: 20px;
 			padding-bottom: 32px;
-			font-size: 0.9rem;
+			font-size: 0.8rem;
 			color: var(--text-secondary-color);
 
 			.links {

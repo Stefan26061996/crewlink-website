@@ -112,6 +112,25 @@
 			}
 		}
 
+		&.type-secondary {
+			--color: var(--text-primary-color);
+			--border-color: var(--color);
+
+			border: 1px solid var(--border-color);
+			color: var(--color);
+
+			padding: 8px 20px;
+			border-radius: 256px;
+
+			transition: border 0.2s, color 0.2s, box-shadow 0.2s;
+
+			&:hover {
+				--color: #fff;
+				box-shadow: inset 0px 0px 12px 4px oklch(from var(--color) l c h / 40%),
+							0px 0px 8px 4px oklch(from var(--color) l c h / 40%);
+			}
+		}
+
 		&.size-large {
 
 			&.type-primary {
