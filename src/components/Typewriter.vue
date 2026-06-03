@@ -181,7 +181,12 @@
 
 <style>
 	.typewriter .cursor {
+		display: inline-block;
+		width: 3px;
+		height: 2.4rem;
 		transition: opacity 100ms ease;
+		background: oklch(from var(--primary-color) calc(l * 2.3) calc(c * 2.0) h);
+		vertical-align: middle;
 	}
 
 	.typewriter .cursor--blink {

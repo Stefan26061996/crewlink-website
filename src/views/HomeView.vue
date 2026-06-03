@@ -373,11 +373,6 @@
 			border-radius: 160px;
 
 			.cursor {
-				display: inline-block;
-				width: 3px;
-				height: 2.4rem;
-				background: oklch(from var(--primary-color) calc(l * 2.3) calc(c * 2.0) h);
-				vertical-align: middle;
 				margin-top: -4px;
 			}
 		}
