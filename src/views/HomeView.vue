@@ -446,11 +446,13 @@
 		.features {
 			display: flex;
 			flex-wrap: wrap;
+			justify-content: center;
 			gap: 64px 32px;
 
 			.feature {
-				width: 100%;
+				flex: 1 1 280px;
 				max-width: 320px;
+				min-width: 0;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
