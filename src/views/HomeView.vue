@@ -35,22 +35,9 @@
 		<div class="max-width">
 			<h2>Du veranstaltest ein Event, aber dir fehlen</h2>
 
-			<p class="roles">Tontechniker<span class="cursor"></span></p>
-			<!-- cycle through these roles and equipment: -->
-			<!--
-				DJs
-				Light Jockeys
-				Fotografen
-				Barkeeper
-				Baristas
-				Zauberkünstler
-				Lautsprecher
-				Mikrofonständer
-				Kabel
-				Bühnenvorhänge
-				mobile Duschen
-				Feuerlöscher
-			-->
+			<p class="roles">
+				<Typewriter :words="pitchRoles" />
+			</p>
 
 			<p>
 				Oder du möchtest dabei helfen, Events erfolgreich durchzuführen?
@@ -216,9 +203,26 @@
 <script setup lang="ts">
 	import GooglePlayButton from '../components/GooglePlayButton.vue'
 	import AppStoreButton from '../components/AppStoreButton.vue'
+	import Typewriter from '../components/Typewriter.vue'
 	import ChatIcon from '../assets/icons/chat.svg'
 	import NotificationIcon from '../assets/icons/notification.svg'
 	import ProfileIcon from '../assets/icons/profile.svg'
+
+	const pitchRoles = [
+		'Tontechniker',
+		'DJs',
+		'Light Jockeys',
+		'Fotografen',
+		'Barkeeper',
+		'Baristas',
+		'Zauberkünstler',
+		'Lautsprecher',
+		'Mikrofonständer',
+		'Kabel',
+		'Bühnenvorhänge',
+		'mobile Duschen',
+		'Feuerlöscher',
+	]
 </script>
 
 <style>
