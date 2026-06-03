@@ -231,6 +231,7 @@
 
 	.toolbar {
 		border-bottom: 1px solid oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.67) h);
+		padding: 0px 20px;
 
 		.toolbar-content {
 			padding: 16px 0px;
