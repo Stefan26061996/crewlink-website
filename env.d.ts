@@ -13,6 +13,37 @@ declare module '*.svg?component' {
 	export default component
 }
 
+interface DeviceMockupMeta {
+	src: string
+	width: number
+	height: number
+}
+
+declare module '*?mockup=*' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
+declare module '../assets/screenshots/search-helpers.png?mockup=iphone15&preset=feature-leading&format=webp&w=600' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
+declare module '../assets/screenshots/trust-score.png?mockup=iphone15&preset=feature-trailing&format=webp&w=600' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
+declare module '../assets/screenshots/find-events.png?mockup=pixel8pro&preset=feature-leading&format=webp&w=600' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
+declare module '../assets/screenshots/plan-help.png?mockup=pixel8pro&preset=feature-trailing&format=webp&w=600' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
 interface ImportMetaEnv {
 	readonly BASE_URL: string
 }

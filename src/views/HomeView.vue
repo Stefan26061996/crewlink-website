@@ -58,7 +58,12 @@
 	<section class="content-section feature-section leading">
 		<div class="max-width feature">
 			<div class="image">
-				IMAGE HERE
+				<img
+					:src="searchHelpersMockup.src"
+					:width="searchHelpersMockup.width"
+					:height="searchHelpersMockup.height"
+					alt=""
+				/>
 			</div>
 
 			<div class="description">
@@ -73,7 +78,12 @@
 	<section class="content-section feature-section trailing">
 		<div class="max-width feature">
 			<div class="image">
-				IMAGE HERE
+				<img
+					:src="trustScoreMockup.src"
+					:width="trustScoreMockup.width"
+					:height="trustScoreMockup.height"
+					alt=""
+				/>
 			</div>
 
 			<div class="description">
@@ -116,7 +126,12 @@
 	<section class="content-section feature-section leading">
 		<div class="max-width feature">
 			<div class="image">
-				IMAGE HERE
+				<img
+					:src="findEventsMockup.src"
+					:width="findEventsMockup.width"
+					:height="findEventsMockup.height"
+					alt=""
+				/>
 			</div>
 
 			<div class="description">
@@ -131,7 +146,12 @@
 	<section class="content-section feature-section trailing">
 		<div class="max-width feature">
 			<div class="image">
-				IMAGE HERE
+				<img
+					:src="planHelpMockup.src"
+					:width="planHelpMockup.width"
+					:height="planHelpMockup.height"
+					alt=""
+				/>
 			</div>
 
 			<div class="description">
@@ -207,6 +227,12 @@
 	import ChatIcon from '../assets/icons/chat.svg'
 	import NotificationIcon from '../assets/icons/notification.svg'
 	import ProfileIcon from '../assets/icons/profile.svg'
+	import {
+		findEventsMockup,
+		planHelpMockup,
+		searchHelpersMockup,
+		trustScoreMockup,
+	} from '../assets/featureMockups'
 
 	const pitchRoles = [
 		'Tontechniker',
@@ -390,20 +416,58 @@
 		.feature {
 			display: flex;
 			align-items: center;
-			gap: 24px;
+			gap: 36px;
 
 			.image {
-				width: 30%;
-				aspect-ratio: 1 / 1;
-				background: rgb(0, 0, 0, 20%);
+				width: 25%;
+				flex-shrink: 0;
+				transition: margin 0.2s;
+
+				img {
+					display: block;
+					width: 100%;
+					height: auto;
+					object-fit: contain;
+				}
 			}
 
 			.description {
+				transition: margin 0.2s;
 
 				p {
 					font-size: var(--size-text-large);
 					color: var(--text-secondary-color);
 				}
+			}
+		}
+
+		&:has(+ .feature-section) {
+
+			.image {
+				margin-bottom: -10%;
+			}
+
+			.description {
+				margin-top: 64px;
+			}
+		}
+
+		& + .feature-section {
+
+			.image {
+				margin-top: -10%;
+				margin-bottom: -10%;
+			}
+		}
+
+		@media screen and (max-width: 620px) {
+
+			.image {
+				margin: 0 !important;
+			}
+
+			.description {
+				margin: 0 !important;
 			}
 		}
 
@@ -422,6 +486,7 @@
 		}
 
 		&.trailing {
+
 			.feature {
 
 				.image {

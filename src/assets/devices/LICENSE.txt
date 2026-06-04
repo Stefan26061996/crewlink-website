@@ -1,0 +1,14 @@
+# Device 3D models
+
+## iPhone 15 Pro (`iphone-15-pro.glb`)
+
+- **Source:** [Apple iPhone 15 Pro Max Black on Sketchfab](https://sketchfab.com/3d-models/apple-iphone-15-pro-max-black-df17520841214c1792fb8a44c6783ee7) by Polyman
+- **License:** [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
+- **Attribution:** “Apple iPhone 15 Pro Max Black” by Polyman, licensed under CC BY 4.0
+
+Also distributed via community tutorials (e.g. JavaScript Mastery iPhone 15 clone repos).
+
+## Pixel 8 Pro (`pixel-8-pro.glb`)
+
+- **Source:** Generated in-repo with Three.js (`scripts/generate-pixel-device.ts`)
+- **License:** Crewlink project — procedural stand-in for Android marketing mockups
