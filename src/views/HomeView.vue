@@ -277,7 +277,7 @@
 			transition: max-width 0.2s, padding 0.2s;
 
 			h1, p {
-				font-size: 2rem;
+				font-size: clamp(1rem, 4vw, 2rem);
 			}
 
 			.stores {
@@ -375,18 +375,18 @@
 
 		h2 {
 			color: var(--text-secondary-color);
-			font-size: 1.5rem;
+			font-size: var(--size-text-larger);
 			font-weight: 500;
 			font-stretch: 100%;
 		}
 
 		p {
 			color: var(--text-secondary-color);
-			font-size: 1.5rem;
+			font-size: var(--size-text-larger);
 		}
 
 		.roles {
-			font-size: 2.0rem;
+			font-size: clamp(1.0rem, 5vw, 2.0rem);
 			font-stretch: 125%;
 			font-weight: 800;
 			color: var(--text-primary-color);

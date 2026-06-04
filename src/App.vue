@@ -130,6 +130,18 @@
 		font-size: var(--size-text-main);
 	}
 
+	@media screen and (max-width: 620px) {
+		:root {
+			--size-text-large: 1.1rem;
+			--size-text-larger: 1.2rem;
+			--size-text-huge: 1.4rem;
+		}
+
+		body {
+			font-size: 10pt;
+		}
+	}
+
 	.max-width {
 		max-width: 1024px;
 		margin: auto;
