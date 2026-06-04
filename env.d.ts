@@ -24,22 +24,22 @@ declare module '*?mockup=*' {
 	export default meta
 }
 
-declare module '../assets/screenshots/organizer-collaborations-ios-de.png?mockup=iphone17pro&preset=feature-leading&format=webp&w=600' {
+declare module '@/assets/screenshots/organizer-collaborations-ios-de.png?mockup=iphone17pro&preset=feature-leading&format=webp&w=600' {
 	const meta: DeviceMockupMeta
 	export default meta
 }
 
-declare module '../assets/screenshots/trust-score-ios-de.png?mockup=iphone17pro&preset=feature-trailing&format=webp&w=600' {
+declare module '@/assets/screenshots/trust-score-ios-de.png?mockup=iphone17pro&preset=feature-trailing&format=webp&w=600' {
 	const meta: DeviceMockupMeta
 	export default meta
 }
 
-declare module '../assets/screenshots/find-events.png?mockup=pixel8pro&preset=feature-leading&format=webp&w=600' {
+declare module '@/assets/screenshots/feed-android-de.png?mockup=pixel8pro&preset=feature-leading&format=webp&w=600' {
 	const meta: DeviceMockupMeta
 	export default meta
 }
 
-declare module '../assets/screenshots/plan-help.png?mockup=pixel8pro&preset=feature-trailing&format=webp&w=600' {
+declare module '@/assets/screenshots/collaboration-equipment-android-de.png?mockup=pixel8pro&preset=feature-trailing&format=webp&w=600' {
 	const meta: DeviceMockupMeta
 	export default meta
 }

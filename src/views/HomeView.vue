@@ -238,12 +238,10 @@
 	import ChatIcon from '../assets/icons/chat.svg'
 	import NotificationIcon from '../assets/icons/notification.svg'
 	import ProfileIcon from '../assets/icons/profile.svg'
-	import {
-		findEventsMockup,
-		planHelpMockup,
-		searchHelpersMockup,
-		trustScoreMockup,
-	} from '../assets/featureMockups'
+	import searchHelpersMockup from '@/assets/screenshots/organizer-collaborations-ios-de.png?mockup=iphone17pro&preset=feature-leading&format=webp&w=600'
+	import trustScoreMockup from '@/assets/screenshots/trust-score-ios-de.png?mockup=iphone17pro&preset=feature-trailing&format=webp&w=600'
+	import findEventsMockup from '@/assets/screenshots/feed-android-de.png?mockup=pixel8pro&preset=feature-leading&format=webp&w=600'
+	import planHelpMockup from '@/assets/screenshots/collaboration-equipment-android-de.png?mockup=pixel8pro&preset=feature-trailing&format=webp&w=600'
 
 	const pitchRoles = [
 		'Tontechniker',
