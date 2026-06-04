@@ -585,6 +585,7 @@
 
 		.platforms {
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: center;
 			gap: 16px;
 			margin-top: 24px;
