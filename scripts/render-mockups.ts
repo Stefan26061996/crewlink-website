@@ -11,7 +11,7 @@
  * ```bash
  * npm run render-mockups -- \
  *   --screenshot src/assets/screenshots/app.png \
- *   --device iphone15 \
+ *   --device iphone17pro \
  *   --preset feature-leading \
  *   --width 600 \
  *   --output /tmp/preview.webp
@@ -47,7 +47,7 @@ function readNumberArg(name: string): number | undefined {
 }
 
 const screenshotPath = readArg('--screenshot')
-const deviceId = resolveDeviceId(readArg('--device') ?? 'iphone15')
+const deviceId = resolveDeviceId(readArg('--device') ?? 'iphone17pro')
 const presetName = readArg('--preset') ?? 'feature-leading'
 const outputPath =
 	readArg('--output') ??
@@ -55,7 +55,7 @@ const outputPath =
 
 if (!screenshotPath) {
 	console.error(
-		'Usage: npm run render-mockups -- --screenshot src/assets/screenshots/search-helpers.png [--device iphone15|pixel8pro] [--preset feature-leading] [--width 600] [--height 600] [--output path.webp]',
+		'Usage: npm run render-mockups -- --screenshot src/assets/screenshots/search-helpers.png [--device iphone17pro|pixel8pro] [--preset feature-leading] [--width 600] [--height 600] [--output path.webp]',
 	)
 	process.exit(1)
 }

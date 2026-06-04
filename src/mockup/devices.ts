@@ -1,21 +1,32 @@
 import type { DeviceDefinition, DeviceId } from './types'
 
+/** Matches `--primary-color` in `src/App.vue`. */
+export const brandPrimaryColor = 0x1a237e
+
 /**
  * Registry of device models available to the mockup renderer and Vite plugin.
  *
- * Import query `mockup=` values map to these keys (`iphone15`, `pixel8pro`).
+ * Import query `mockup=` values map to these keys (`iphone17pro`, `pixel8pro`).
  */
 export const deviceDefinitions: Record<DeviceId, DeviceDefinition> = {
-	iphone15: {
-		id: 'iphone15',
-		glbFileName: 'iphone-15-pro.glb',
-		screenMeshName: 'xXDHkMplTIDAXLN',
+	iphone17pro: {
+		id: 'iphone17pro',
+		glbFileName: 'iphone-17-pro/source/iPhone 17 Pro.glb',
+		screenMeshName: 'iPhone_17_Pro004_4',
+		hiddenMeshNames: ['iPhone_17_Pro004_3', 'iPhone_17_Pro004_2'],
+		frameMaterialNames: ['Anodized aluminum'],
+		frameAccentMaterialNames: ['Plastic antena', 'Plastic port'],
+		frameAccentLighten: 0.03,
+		frameTintColor: brandPrimaryColor,
+		frameTintMix: 0.67,
 		bodyColor: 0x3b3b3d,
+		// Downloaded model screen faces -Z; rotate 180° to face the mockup camera (+Z).
 		modelRotationY: 180,
-		screenEmissiveIntensity: 0.5,
-		license: 'CC-BY-4.0 — Polyman / Sketchfab (iPhone 15 Pro Max)',
-		sourceUrl:
-			'https://sketchfab.com/3d-models/apple-iphone-15-pro-max-black-df17520841214c1792fb8a44c6783ee7',
+		screenEmissiveIntensity: 0.65,
+		screenTextureRotation: Math.PI,
+		screenMaterialBackFace: true,
+		license: 'User-provided iPhone 17 Pro model (see src/assets/devices/iphone-17-pro/)',
+		sourceUrl: 'https://crewlink.cloud',
 	},
 	pixel8pro: {
 		id: 'pixel8pro',
@@ -29,27 +40,15 @@ export const deviceDefinitions: Record<DeviceId, DeviceDefinition> = {
 }
 
 /**
- * iPhone GLB material names that represent screen glass or lens elements.
- * Skipped during body tinting; opacity is reduced separately so emissive shows through.
- */
-export const screenMaterialKeysToSkip = new Set([
-	'zFdeDaGNRwzccye',
-	'ujsvqBWRMnqdwPx',
-	'hUlRcbieVuIiOXG',
-	'jlzuBkUzuJqgiAK',
-	'xNrofRCqOXXHVZt',
-])
-
-/**
  * Resolves a mockup import query or CLI flag to a {@link DeviceId}.
  *
  * @param value - Raw device string from `?mockup=` or `--device`.
  * @throws When the value is not a known device id.
  */
 export function resolveDeviceId(value: string): DeviceId {
-	if (value === 'iphone15' || value === 'pixel8pro') {
+	if (value === 'iphone17pro' || value === 'pixel8pro') {
 		return value
 	}
 
-	throw new Error(`Unknown mockup device "${value}". Expected iphone15 or pixel8pro.`)
+	throw new Error(`Unknown mockup device "${value}". Expected iphone17pro or pixel8pro.`)
 }

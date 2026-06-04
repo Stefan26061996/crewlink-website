@@ -12,7 +12,7 @@ import path from 'node:path'
 import createGl from 'gl'
 import sharp from 'sharp'
 import * as THREE from 'three'
-import { deviceDefinitions, screenMaterialKeysToSkip } from './devices'
+import { deviceDefinitions } from './devices'
 import { createGltfLoader } from './loadGltf'
 import { installThreeNodePolyfills } from './nodePolyfills'
 import type { DeviceDefinition, DeviceId, MockupRenderOptions, MockupRenderResult } from './types'
@@ -70,29 +70,6 @@ async function loadScreenshotTexture(screenshotPath: string): Promise<THREE.Text
 	return texture
 }
 
-/** Applies the titanium body tint to non-screen iPhone materials. */
-function tintIphoneMaterials(model: THREE.Object3D, bodyColor: number): void {
-	model.traverse((object) => {
-		if (!(object instanceof THREE.Mesh)) {
-			return
-		}
-
-		const materials = Array.isArray(object.material) ? object.material : [object.material]
-		for (const material of materials) {
-			if (!(material instanceof THREE.MeshStandardMaterial)) {
-				continue
-			}
-
-			if (screenMaterialKeysToSkip.has(material.name)) {
-				continue
-			}
-
-			material.color = new THREE.Color(bodyColor)
-			material.needsUpdate = true
-		}
-	})
-}
-
 /**
  * Replaces the screen mesh material with an emissive PBR material
  * so the screenshot reads as a self-lit display.
@@ -102,8 +79,16 @@ function applyScreenshotTexture(
 	screenMeshName: string,
 	texture: THREE.Texture,
 	screenEmissiveIntensity: number,
+	screenTextureRotation = 0,
+	screenMaterialBackFace = false,
 ): void {
 	let applied = false
+
+	if (screenTextureRotation !== 0) {
+		texture.center.set(0.5, 0.5)
+		texture.rotation = screenTextureRotation
+		texture.needsUpdate = true
+	}
 
 	model.traverse((object) => {
 		if (!(object instanceof THREE.Mesh) || object.name !== screenMeshName) {
@@ -117,6 +102,7 @@ function applyScreenshotTexture(
 			emissiveIntensity: screenEmissiveIntensity,
 			roughness: 1,
 			metalness: 0,
+			side: screenMaterialBackFace ? THREE.BackSide : THREE.FrontSide,
 		})
 		applied = true
 	})
@@ -126,50 +112,21 @@ function applyScreenshotTexture(
 	}
 }
 
-/**
- * iPhone GLB stacks glass meshes above the display — thin them so emissive shows through.
- * Higher {@link screenEmissiveIntensity} values yield more transparent glass.
- */
-function softenIphoneScreenGlass(model: THREE.Object3D, screenEmissiveIntensity: number): void {
-	const glassOpacity = Math.max(0.04, 0.28 - screenEmissiveIntensity * 0.22)
-
-	model.traverse((object) => {
-		if (!(object instanceof THREE.Mesh)) {
-			return
-		}
-
-		const materials = Array.isArray(object.material) ? object.material : [object.material]
-		for (const material of materials) {
-			if (
-				!(material instanceof THREE.MeshStandardMaterial) ||
-				!screenMaterialKeysToSkip.has(material.name)
-			) {
-				continue
-			}
-
-			material.transparent = true
-			material.opacity = glassOpacity
-			material.metalness = 0.1
-			material.roughness = 0.05
-			material.depthWrite = false
-			material.needsUpdate = true
-		}
-	})
-}
-
-/** Applies emissive screen material and device-specific glass/overlay tweaks. */
+/** Applies emissive screen material to the device screen mesh. */
 function applyDeviceScreenMaterial(
 	model: THREE.Object3D,
 	device: DeviceDefinition,
 	texture: THREE.Texture,
 ): void {
 	const screenEmissiveIntensity = device.screenEmissiveIntensity ?? 0.75
-
-	applyScreenshotTexture(model, device.screenMeshName, texture, screenEmissiveIntensity)
-
-	if (device.id === 'iphone15') {
-		softenIphoneScreenGlass(model, screenEmissiveIntensity)
-	}
+	applyScreenshotTexture(
+		model,
+		device.screenMeshName,
+		texture,
+		screenEmissiveIntensity,
+		device.screenTextureRotation ?? 0,
+		device.screenMaterialBackFace ?? false,
+	)
 }
 
 /** Creates a headless WebGL renderer backed by the `gl` package. */
@@ -239,20 +196,81 @@ function parseBackground(background: string): { color: THREE.Color; alpha: numbe
 	return { color: new THREE.Color(`#${hex}`), alpha: 1 }
 }
 
-/** Loads and optionally tints a device GLB from {@link deviceDefinitions}. */
+/** Blends frame material colors toward a brand tint while keeping PBR maps readable. */
+function tintFrameMaterials(model: THREE.Object3D, device: DeviceDefinition): void {
+	const {
+		frameMaterialNames,
+		frameAccentMaterialNames,
+		frameAccentLighten = 0,
+		frameTintColor,
+		frameTintMix,
+	} = device
+
+	if (frameTintColor === undefined || !frameTintMix) {
+		return
+	}
+
+	const tint = new THREE.Color(frameTintColor)
+	const white = new THREE.Color(0xffffff)
+
+	const applyTint = (material: THREE.MeshStandardMaterial, mix: number, lighten: number): void => {
+		material.color.copy(material.color).lerp(tint, mix)
+		if (lighten > 0) {
+			material.color.lerp(white, lighten)
+		}
+		material.needsUpdate = true
+	}
+
+	model.traverse((object) => {
+		if (!(object instanceof THREE.Mesh)) {
+			return
+		}
+
+		const materials = Array.isArray(object.material) ? object.material : [object.material]
+		for (const material of materials) {
+			if (!(material instanceof THREE.MeshStandardMaterial)) {
+				continue
+			}
+
+			if (frameMaterialNames?.includes(material.name)) {
+				applyTint(material, frameTintMix, 0)
+				continue
+			}
+
+			if (frameAccentMaterialNames?.includes(material.name)) {
+				applyTint(material, frameTintMix, frameAccentLighten)
+			}
+		}
+	})
+}
+
+/** Hides duplicate screen/glass meshes bundled with the iPhone 17 Pro GLB. */
+function hideDeviceMeshes(model: THREE.Object3D, hiddenMeshNames: string[] | undefined): void {
+	if (!hiddenMeshNames?.length) {
+		return
+	}
+
+	const hidden = new Set(hiddenMeshNames)
+	model.traverse((object) => {
+		if (hidden.has(object.name)) {
+			object.visible = false
+		}
+	})
+}
+
+/** Loads a device GLB from {@link deviceDefinitions}. */
 async function loadDeviceModel(deviceId: DeviceId): Promise<THREE.Group> {
 	const device = deviceDefinitions[deviceId]
+	const glbRelativePath = path.join('src/assets/devices', device.glbFileName)
 	const loader = createGltfLoader()
 	const gltf = await loader.parseAsync(
-		readGlb(path.join('src/assets/devices', device.glbFileName)),
-		'',
+		readGlb(glbRelativePath),
+		`${path.join(process.cwd(), path.dirname(glbRelativePath))}/`,
 	)
 
 	const model = gltf.scene.clone(true)
-	if (deviceId === 'iphone15') {
-		tintIphoneMaterials(model, device.bodyColor)
-	}
-
+	hideDeviceMeshes(model, device.hiddenMeshNames)
+	tintFrameMaterials(model, device)
 	return model
 }
 

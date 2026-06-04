@@ -7,7 +7,7 @@
  *
  * @example
  * ```ts
- * import mockup from './screenshots/app.png?mockup=iphone15&preset=feature-leading&format=webp&w=600'
+ * import mockup from './screenshots/app.png?mockup=iphone17pro&preset=feature-leading&format=webp&w=600'
  * // mockup.src  → '/assets/app-mockup-abc.webp' (build) or '/@device-mockup/…' (dev)
  * // mockup.width, mockup.height → rendered dimensions
  * ```
@@ -16,7 +16,7 @@
  *
  * | Param | Purpose |
  * |-------|---------|
- * | `mockup` | Device id: `iphone15` \| `pixel8pro` |
+ * | `mockup` | Device id: `iphone17pro` \| `pixel8pro` |
  * | `preset` | Named angle from `src/mockup/presets/*.json` |
  * | `w`, `h` | Output dimensions (overrides preset) |
  * | `format` | `webp` (default) or `png` |
@@ -70,7 +70,7 @@ type RenderedMockup = {
 
 /**
  * Parses a Vite import id such as
- * `./app.png?mockup=iphone15&preset=feature-leading&w=600`.
+ * `./app.png?mockup=iphone17pro&preset=feature-leading&w=600`.
  *
  * @returns Parsed file path and query, or `null` when the id is not a mockup import.
  */
@@ -151,10 +151,20 @@ function buildCacheKey(
 	hash.update(deviceId)
 	hash.update(
 		JSON.stringify({
+			glbFileName: device.glbFileName,
+			screenMeshName: device.screenMeshName,
+			hiddenMeshNames: device.hiddenMeshNames ?? [],
 			modelRotationX: device.modelRotationX ?? 0,
 			modelRotationY: device.modelRotationY ?? 0,
 			modelRotationZ: device.modelRotationZ ?? 0,
 			screenEmissiveIntensity: device.screenEmissiveIntensity ?? 0.75,
+			screenTextureRotation: device.screenTextureRotation ?? 0,
+			screenMaterialBackFace: device.screenMaterialBackFace ?? false,
+			frameMaterialNames: device.frameMaterialNames ?? [],
+			frameAccentMaterialNames: device.frameAccentMaterialNames ?? [],
+			frameAccentLighten: device.frameAccentLighten ?? 0,
+			frameTintColor: device.frameTintColor ?? null,
+			frameTintMix: device.frameTintMix ?? 0,
 		}),
 	)
 	hash.update(JSON.stringify(preset))

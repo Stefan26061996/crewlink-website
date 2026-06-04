@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"generate:pixel-device": "tsx scripts/generate-pixel-device.ts",
 		"generate:screenshots": "tsx scripts/generate-screenshots.ts",
-		"prepare:iphone-glb": "tsx scripts/decode-iphone-glb.ts",
+		"prepare:iphone-glb": "tsx scripts/prepare-iphone-glb.ts",
 		"render-mockups": "tsx scripts/render-mockups.ts"
 	},
 	"dependencies": {

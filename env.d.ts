@@ -24,12 +24,12 @@ declare module '*?mockup=*' {
 	export default meta
 }
 
-declare module '../assets/screenshots/search-helpers.png?mockup=iphone15&preset=feature-leading&format=webp&w=600' {
+declare module '../assets/screenshots/organizer-collaborations-ios-de.png?mockup=iphone17pro&preset=feature-leading&format=webp&w=600' {
 	const meta: DeviceMockupMeta
 	export default meta
 }
 
-declare module '../assets/screenshots/trust-score.png?mockup=iphone15&preset=feature-trailing&format=webp&w=600' {
+declare module '../assets/screenshots/trust-score-ios-de.png?mockup=iphone17pro&preset=feature-trailing&format=webp&w=600' {
 	const meta: DeviceMockupMeta
 	export default meta
 }
