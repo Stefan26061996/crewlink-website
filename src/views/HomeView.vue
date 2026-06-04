@@ -192,10 +192,14 @@
 		</ul>
 	</section>
 
-	<section class="content-section faq-section">
+	<section class="content-section heading-section" aria-hidden="true">
 		<div class="max-width">
 			<h2>Häufig gestellte Fragen</h2>
+		</div>
+	</section>
 
+	<section class="content-section faq-section" aria-label="Häufig gestellte Fragen">
+		<div class="max-width">
 			<dl>
 				<dt>Für wen ist Crewlink?</dt>
 				<dd>Crewlink ist für Veranstalter und Helfer gleichermaßen. Veranstalter posten ihre Events und Helfer suchen sich diese raus. Helfer können zudem auch proaktiv ihr Equipment zur Miete inserieren.</dd>
@@ -390,6 +394,7 @@
 	}
 
 	.main-pitch {
+		background: oklch(from var(--page-background) calc(l * 0.9) c h);
 
 		h2 {
 			color: var(--text-secondary-color);
@@ -411,7 +416,7 @@
 
 			margin: 16px 0px;
 			padding: 8px 28px;
-			background: oklch(from var(--page-background) calc(l * 0.8) c h);
+			background: oklch(from var(--page-background) calc(l * 0.7) calc(c * 0.7) h);
 
 			display: inline-block;
 			border-radius: 160px;
@@ -455,9 +460,15 @@
 				p {
 					font-size: var(--size-text-large);
 					color: var(--text-secondary-color);
+					margin-top: 16px;
 				}
 			}
 		}
+
+		&:not(:has(+ .feature-section)) {
+			border-bottom: 1px solid oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.67) h);
+		}
+
 
 		&:has(+ .feature-section) {
 
@@ -523,8 +534,9 @@
 	}
 
 	.other-features-section {
-		padding-top: 64px;
-		padding-bottom: 64px;
+		padding-top: 96px;
+		padding-bottom: 96px;
+		background: oklch(from var(--page-background) calc(l * 0.9) c h);
 
 		.features {
 			display: flex;
@@ -547,7 +559,7 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					background: oklch(from var(--page-background) calc(l * 0.8) c h);
+					background: oklch(from var(--page-background) calc(l * 0.7) calc(c * 0.7) h);
 					border-radius: 16px;
 					margin-bottom: 16px;
 					color: var(--text-primary-color);
