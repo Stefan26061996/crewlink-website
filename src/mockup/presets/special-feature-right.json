@@ -1,0 +1,11 @@
+{	"rotationX": 0,
+	"rotationY": 40,
+	"rotationZ": 0,
+	"cameraFov": 25,
+	"cameraDistanceFactor": 2.25,
+	"cameraYOffsetFactor": 0.05,
+	"cameraXOffsetFactor": 0.35,
+	"width": 1024,
+	"height": 1024,
+	"background": "transparent"
+}

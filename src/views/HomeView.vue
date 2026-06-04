@@ -143,7 +143,7 @@
 			<div class="description">
 				<h3>Finde Events, die deine Hilfe brauchen</h3>
 				<p>
-					Lass dein Equipment nicht ungenutzt – biete es anderen gegen Miete an. Reduzierte Downtime, glückliche Menschen.
+					Lass dein Equipment nicht ungenutzt – biete es anderen gegen Miete an. Reduzierte Downtime, glückliche Menschen. Und mehr Events, die doch noch stattfinden können.
 				</p>
 			</div>
 		</div>
@@ -164,7 +164,8 @@
 			<div class="description">
 				<h3>Plane deine Hilfe</h3>
 				<p>
-					Lege genau fest, welches Equipment und welches Personal für Events zur Verfügung steht.
+					Lege genau fest, welches Equipment und welches Personal für Events zur Verfügung steht. Du kannst dein Equipment auch in Paketen anbieten, z.B. in Kombination
+					mit Personal.
 				</p>
 			</div>
 		</div>
@@ -190,6 +191,22 @@
 				<p>Teile der Community mit, was du anzubieten hast</p>
 			</li>
 		</ul>
+	</section>
+
+	<section class="content-section special-feature-section" aria-hidden="true">
+		<div class="max-width content">
+			<img class="feature-1"
+			     :src="feedFiltersMockup.src"
+			     :width="feedFiltersMockup.width"
+			     :height="feedFiltersMockup.height"
+			     alt="" />
+
+			<img class="feature-2"
+			     :src="chatsMockup.src"
+			     :width="chatsMockup.width"
+			     :height="chatsMockup.height"
+			     alt="" />
+		</div>
 	</section>
 
 	<section class="content-section heading-section" aria-hidden="true">
@@ -242,6 +259,8 @@
 	import trustScoreMockup from '@/assets/screenshots/trust-score-ios-de.png?mockup=iphone17pro&preset=feature-trailing&format=webp&w=600'
 	import findEventsMockup from '@/assets/screenshots/feed-android-de.png?mockup=pixel8pro&preset=feature-leading&format=webp&w=600'
 	import planHelpMockup from '@/assets/screenshots/collaboration-equipment-android-de.png?mockup=pixel8pro&preset=feature-trailing&format=webp&w=600'
+	import feedFiltersMockup from '@/assets/screenshots/feed-filters-ios-de.png?mockup=iphone17pro&preset=special-feature-left&format=webp&w=600'
+	import chatsMockup from '@/assets/screenshots/chats-ios-de.png?mockup=iphone17pro&preset=special-feature-right&format=webp&w=600'
 
 	const pitchRoles = [
 		'Tontechniker',
@@ -606,6 +625,41 @@
 			dt + dd {
 				margin-top: 8px;
 			}
+		}
+	}
+
+	.special-feature-section {
+		border-top: 1px solid oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.35) h);
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: center;
+
+		padding-top: 64px;
+		padding-bottom: 64px;
+
+		background: radial-gradient(circle at center, oklch(from var(--page-background) calc(l * 1.7) calc(c * 2) h), transparent 50%);
+
+		.content {
+			object-fit: contain;
+		}
+
+		.feature-1,
+		.feature-2 {
+			max-height: 768px;
+			max-width: calc(50svw - 24px);
+			height: auto;
+			width: auto;
+		}
+
+		.feature-1 {
+			filter: drop-shadow(16px 8px 24px rgba(0 0 0 / 42%));
+		}
+
+		.feature-2 {
+			margin-left: -38px;
+			margin-bottom: 96px;
+			filter: drop-shadow(-16px 8px 24px rgba(0 0 0 / 56%));
 		}
 	}
 
