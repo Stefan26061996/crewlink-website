@@ -260,6 +260,7 @@
 
 <style>
 	header.home-main {
+		overflow: hidden;
 
 		.logo a {
 			text-decoration: none;
@@ -281,8 +282,8 @@
 
 		.content {
 			box-sizing: border-box;
-			padding-top: 128px;
-			padding-bottom: calc(384px - 128px);
+			padding-top: 64px;
+			padding-bottom: calc(384px - 192px);
 			padding-left: 16px;
 			padding-right: 16px;
 			max-width: calc(100% - 312px);
@@ -308,7 +309,7 @@
 			margin-bottom: -6px;
 			text-align: right;
 
-			transition: right 0.2s;
+			transition: right 0.2s, bottom 0.2s;
 
 			img {
 				width: 100%;
@@ -339,14 +340,14 @@
 
 			.content {
 				max-width: calc(100% - 148px);
-				padding-top: 32px;
+				padding-top: 48px;
 
 				.stores {
 					flex-direction: column;
 					align-items: flex-start;
 					gap: 24px;
 					margin-top: 32px;
-					margin-bottom: -192px;
+					margin-bottom: -128px;
 				}
 			}
 
@@ -372,8 +373,13 @@
 				}
 
 				.stores {
-					margin-top: 56px;
+					margin-top: 84px;
+					margin-bottom: -128px;
 				}
+			}
+
+			.hero {
+				bottom: -84px;
 			}
 		}
 	}
