@@ -395,17 +395,20 @@
 
 	.main-pitch {
 		background: oklch(from var(--page-background) calc(l * 0.9) c h);
+		padding-top: 48px;
+		padding-bottom: 48px;
+		text-align: center;
 
 		h2 {
 			color: var(--text-secondary-color);
-			font-size: var(--size-text-larger);
+			font-size: var(--size-text-large);
 			font-weight: 500;
 			font-stretch: 100%;
 		}
 
 		p {
 			color: var(--text-secondary-color);
-			font-size: var(--size-text-larger);
+			font-size: var(--size-text-large);
 		}
 
 		.roles {
@@ -457,6 +460,10 @@
 			.description {
 				transition: margin 0.2s;
 
+				h3 {
+					font-size: var(--size-text-larger);
+				}
+
 				p {
 					font-size: var(--size-text-large);
 					color: var(--text-secondary-color);
@@ -468,7 +475,6 @@
 		&:not(:has(+ .feature-section)) {
 			border-bottom: 1px solid oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.67) h);
 		}
-
 
 		&:has(+ .feature-section) {
 
