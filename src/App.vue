@@ -254,7 +254,10 @@
 
 		.content {
 			display: flex;
-			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 24px 16px;
+			justify-content: center;
+			align-items: center;
 			padding-left: 20px;
 			padding-right: 20px;
 			padding-bottom: 32px;
