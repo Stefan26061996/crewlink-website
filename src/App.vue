@@ -1,4 +1,6 @@
 <template>
+	<a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
 	<header :class="['main-header', { bordered: !isDeepLink }]" v-if="!isHome">
 		<div class="max-width">
 			<div class="logo">
@@ -7,7 +9,9 @@
 		</div>
 	</header>
 
-	<RouterView />
+	<main id="main-content" tabindex="-1">
+		<RouterView />
+	</main>
 
 	<footer class="main-footer">
 		<div class="content max-width">
@@ -15,27 +19,36 @@
 				&copy; {{ new Date().getFullYear() }} Crewlink
 			</div>
 
-			<ul class="links">
-				<router-link :to="{ name: 'imprint' }">Impressum</router-link>
-				<router-link :to="{ name: 'privacy-policy' }">Datenschutz</router-link>
-				<router-link :to="{ name: 'terms' }">AGB</router-link>
-				<router-link :to="{ name: 'delete-data' }">Datenlöschung</router-link>
-			</ul>
+			<nav aria-label="Rechtliches">
+				<ul class="links">
+					<li>
+						<router-link :to="{ name: 'imprint' }">Impressum</router-link>
+					</li>
+
+					<li>
+						<router-link :to="{ name: 'privacy-policy' }">Datenschutz</router-link>
+					</li>
+
+					<li>
+						<router-link :to="{ name: 'terms' }">AGB</router-link>
+					</li>
+
+					<li>
+						<router-link :to="{ name: 'delete-data' }">Datenlöschung</router-link>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</footer>
 </template>
 
 <script setup lang="ts">
-	import { computed, onMounted } from 'vue'
+	import { computed } from 'vue'
 	import { RouterView, useRoute } from 'vue-router'
 
 	const $route = useRoute()
 	const isHome = computed(() => $route.name === 'home')
 	const isDeepLink = computed(() => $route.meta.deepLink === true)
-
-	onMounted(() => {
-		console.log('$route', $route)
-	})
 </script>
 
 <style>
@@ -78,11 +91,69 @@
 
 	a {
 		color: var(--text-primary-color);
+		text-decoration: underline;
+		text-underline-offset: 2px;
 		transition: color 0.2s;
 
 		&:hover {
 			color: var(--text-secondary-color);
 		}
+	}
+
+	.crewlink-button,
+	.crewlink-app-store-button a,
+	.crewlink-google-play-button a,
+	.skip-link {
+		text-decoration: none;
+	}
+
+	:focus {
+		outline: none;
+	}
+
+	:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 3px;
+	}
+
+	.skip-link {
+		position: absolute;
+		left: -9999px;
+		top: auto;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		z-index: 100;
+		padding: 12px 20px;
+		background: var(--page-background);
+		color: var(--text-primary-color);
+		font-weight: 800;
+		border-radius: var(--container-border-radius);
+	}
+
+	.skip-link:focus-visible {
+		position: fixed;
+		left: 16px;
+		top: 16px;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	#main-content {
+		flex: 1;
 	}
 
 	strong {
@@ -159,6 +230,10 @@
 
 		.logo {
 
+			a {
+				text-decoration: none;
+			}
+
 			img {
 				height: 64px;
 			}
@@ -228,8 +303,13 @@
 			margin-top: 16px;
 		}
 
+		h1 + .document-date {
+			margin-top: 8px;
+		}
+
 		h1 + .text-content,
-		p + .text-content {
+		p + .text-content,
+		.document-date + .text-content {
 			margin-top: 24px;
 		}
 
@@ -268,6 +348,9 @@
 				display: flex;
 				flex-wrap: wrap;
 				gap: 16px;
+				list-style: none;
+				margin: 0;
+				padding: 0;
 			}
 		}
 	}

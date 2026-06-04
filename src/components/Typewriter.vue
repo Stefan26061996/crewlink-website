@@ -20,6 +20,7 @@
 	)
 
 	const displayedText = ref('')
+	const announcedText = ref('')
 	const wordIndex = ref(0)
 	const phase = ref<Phase>('typing')
 
@@ -37,6 +38,10 @@
 	function currentWord(): string {
 		const words = filteredWords()
 		return words[wordIndex.value] ?? ''
+	}
+
+	function announceWord(text: string) {
+		announcedText.value = text
 	}
 
 	function clearScheduled() {
@@ -80,6 +85,7 @@
 			}
 
 			phase.value = 'paused'
+			announceWord(displayedText.value)
 			schedule(props.pauseAfterTypeMs, tick)
 			return
 		}
@@ -108,12 +114,14 @@
 		const words = filteredWords()
 		if (words.length === 0) {
 			displayedText.value = ''
+			announcedText.value = ''
 			return
 		}
 
 		wordIndex.value = 0
 		phase.value = 'typing'
 		displayedText.value = ''
+		announcedText.value = ''
 		clearScheduled()
 		tick()
 	}
@@ -122,22 +130,26 @@
 		const words = filteredWords()
 		if (words.length === 0) {
 			displayedText.value = ''
+			announcedText.value = ''
 			return
 		}
 
 		wordIndex.value = 0
 		displayedText.value = words[0]
+		announceWord(words[0])
 		clearReducedMotionInterval()
 
 		reducedMotionIntervalId = setInterval(() => {
 			const list = filteredWords()
 			if (list.length === 0) {
 				displayedText.value = ''
+				announcedText.value = ''
 				return
 			}
 
 			wordIndex.value = (wordIndex.value + 1) % list.length
 			displayedText.value = list[wordIndex.value]
+			announceWord(displayedText.value)
 		}, 4000)
 	}
 
@@ -174,9 +186,11 @@
 </script>
 
 <template>
-	<span class="typewriter" aria-live="polite">
+	<span class="typewriter" aria-hidden="true">
 		{{ displayedText }}<span class="cursor" :class="{ 'cursor--blink': cursorBlink }" aria-hidden="true"></span>
 	</span>
+
+	<span class="sr-only" role="status" aria-live="polite" aria-atomic="true">{{ announcedText }}</span>
 </template>
 
 <style>
@@ -211,6 +225,13 @@
 		}
 
 		100% {
+			opacity: 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.typewriter .cursor--blink {
+			animation: none;
 			opacity: 1;
 		}
 	}

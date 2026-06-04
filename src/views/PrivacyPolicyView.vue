@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<div class="toolbar">
+	<nav class="toolbar" aria-label="Seitennavigation">
 		<div class="toolbar-content max-width">
 			<Button :to="{ name: 'home' }" class="back-button" type="primary">
 				<template #icon>
@@ -14,12 +14,11 @@
 				Zurück zur Startseite
 			</Button>
 		</div>
-	</div>
+	</nav>
 
 	<div class="main-content max-width">
 		<h1>Datenschutzerklärung</h1>
-		<span class="secondary"><em>Stand: Juni 2026</em></span>
-		<br /><br />
+		<p class="document-date secondary"><em>Stand: Juni 2026</em></p>
 
 		<section class="text-content">
 			<h2>1. Verantwortlicher</h2>
@@ -62,34 +61,44 @@
 			<h2>4. Zwecke und Rechtsgrundlagen</h2>
 
 			<table>
-				<tr>
-					<th>Zweck</th>
-					<th>Rechtsgrundlage</th>
-				</tr>
-				<tr>
-					<td>Bereitstellung der App-Funktionen (Registrierung, Event-Feed, Inserate, Chat, Profilverwaltung)</td>
-					<td>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung / vorvertragliche Maßnahmen)</td>
-				</tr>
-				<tr>
-					<td>Standortbasierte Umkreissuche (nur mit Einwilligung)</td>
-					<td>Art. 6 Abs. 1 lit. a DSGVO, § 25 TTDSG (Einwilligung)</td>
-				</tr>
-				<tr>
-					<td>Verbesserung der App, Analyse des Nutzungsverhaltens, Fehlerbehebung</td>
-					<td>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse – Interesse an einer sicheren, benutzerfreundlichen App)</td>
-				</tr>
-				<tr>
-					<td>Betrugsprävention, Missbrauchserkennung, Durchsetzung rechtlicher Ansprüche</td>
-					<td>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse – Schutz vor Schäden)</td>
-				</tr>
-				<tr>
-					<td>Erfüllung gesetzlicher Aufbewahrungspflichten (z. B. Steuerrecht)</td>
-					<td>Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung)</td>
-				</tr>
-				<tr>
-					<td>Versand von Service-E-Mails (z. B. Bestätigung der E-Mail-Adresse, wichtige Änderungen)</td>
-					<td>Art. 6 Abs. 1 lit. b DSGVO (vertraglich erforderlich)</td>
-				</tr>
+				<thead>
+					<tr>
+						<th scope="col">Zweck</th>
+						<th scope="col">Rechtsgrundlage</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>Bereitstellung der App-Funktionen (Registrierung, Event-Feed, Inserate, Chat, Profilverwaltung)</td>
+						<td>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung / vorvertragliche Maßnahmen)</td>
+					</tr>
+
+					<tr>
+						<td>Standortbasierte Umkreissuche (nur mit Einwilligung)</td>
+						<td>Art. 6 Abs. 1 lit. a DSGVO, § 25 TTDSG (Einwilligung)</td>
+					</tr>
+
+					<tr>
+						<td>Verbesserung der App, Analyse des Nutzungsverhaltens, Fehlerbehebung</td>
+						<td>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse – Interesse an einer sicheren, benutzerfreundlichen App)</td>
+					</tr>
+
+					<tr>
+						<td>Betrugsprävention, Missbrauchserkennung, Durchsetzung rechtlicher Ansprüche</td>
+						<td>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse – Schutz vor Schäden)</td>
+					</tr>
+
+					<tr>
+						<td>Erfüllung gesetzlicher Aufbewahrungspflichten (z. B. Steuerrecht)</td>
+						<td>Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung)</td>
+					</tr>
+
+					<tr>
+						<td>Versand von Service-E-Mails (z. B. Bestätigung der E-Mail-Adresse, wichtige Änderungen)</td>
+						<td>Art. 6 Abs. 1 lit. b DSGVO (vertraglich erforderlich)</td>
+					</tr>
+				</tbody>
 			</table>
 		</section>
 

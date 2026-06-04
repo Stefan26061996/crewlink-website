@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<div class="toolbar">
+	<nav class="toolbar" aria-label="Seitennavigation">
 		<div class="toolbar-content max-width">
 			<Button :to="{ name: 'home' }" class="back-button" type="primary">
 				<template #icon>
@@ -14,12 +14,11 @@
 				Zurück zur Startseite
 			</Button>
 		</div>
-	</div>
+	</nav>
 
 	<div class="main-content max-width crewlink-delete-data-view">
 		<h1>Löschung meiner Daten bei Crewlink</h1>
-		<span class="secondary"><em>Stand: Juni 2026</em></span>
-		<br /><br />
+		<p class="document-date secondary"><em>Stand: Juni 2026</em></p>
 
 		<section class="text-content">
 			<p>Wenn du dein Crewlink-Konto löschen und alle deine Daten entfernen lassen möchtest, sende bitte eine E-Mail an:</p>

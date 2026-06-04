@@ -39,19 +39,19 @@ const routes: RouteRecordRaw[] = [
 		path: '/@:username',
 		name: 'deep-link-profile',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink', deepLink: true },
+		meta: { title: 'Profil in Crewlink öffnen', deepLink: true },
 	},
 	{
 		path: '/events/:id',
 		name: 'deep-link-event',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink', deepLink: true },
+		meta: { title: 'Event in Crewlink öffnen', deepLink: true },
 	},
 	{
 		path: '/listings/:id',
 		name: 'deep-link-listing',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink', deepLink: true },
+		meta: { title: 'Inserat in Crewlink öffnen', deepLink: true },
 	},
 	{
 		path: '/index.html',
@@ -61,7 +61,7 @@ const routes: RouteRecordRaw[] = [
 		path: '/open.html',
 		name: 'open-html',
 		component: () => import('../views/OpenInAppView.vue'),
-		meta: { title: 'Crewlink', deepLink: true, },
+		meta: { title: 'In Crewlink öffnen', deepLink: true },
 	},
 ]
 

@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<div class="toolbar">
+	<nav class="toolbar" aria-label="Seitennavigation">
 		<div class="toolbar-content max-width">
 			<Button :to="{ name: 'home' }" class="back-button" type="primary">
 				<template #icon>
@@ -14,7 +14,7 @@
 				Zurück zur Startseite
 			</Button>
 		</div>
-	</div>
+	</nav>
 
 	<div class="main-content max-width">
 		<h1>Impressum</h1>

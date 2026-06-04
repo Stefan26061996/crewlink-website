@@ -1,12 +1,20 @@
 <template>
     <div class="crewlink-google-play-button">
-	    <a aria-label="Download bei Google Play, Android" href="">
-		    <img src="/images/stores/get-on-google-play.svg" alt="Google Play" />
+	    <a aria-label="Download bei Google Play, Android"
+	       aria-describedby="google-play-requirements"
+	       :href="STORE_ANDROID_URL"
+	       rel="noopener noreferrer"
+	       target="_blank">
+		    <img src="/images/stores/get-on-google-play.svg" alt="" />
 	    </a>
 
-	    <span class="requirements">Android 9 oder neuer</span>
+	    <span id="google-play-requirements" class="requirements">Android 9 oder neuer</span>
     </div>
 </template>
+
+<script setup lang="ts">
+	import { STORE_ANDROID_URL } from '../config/links'
+</script>
 
 <style>
     .crewlink-google-play-button {

@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<div class="toolbar">
+	<nav class="toolbar" aria-label="Seitennavigation">
 		<div class="toolbar-content max-width">
 			<Button :to="{ name: 'home' }" class="back-button" type="primary">
 				<template #icon>
@@ -14,12 +14,11 @@
 				Zurück zur Startseite
 			</Button>
 		</div>
-	</div>
+	</nav>
 
 	<div class="main-content max-width">
 		<h1>Allgemeine Geschäftsbedingungen (AGB)</h1>
-		<span class="secondary"><em>Stand: April 2026</em></span>
-		<br /><br />
+		<p class="document-date secondary"><em>Stand: April 2026</em></p>
 
 		<section class="text-content">
 			<h2>§1 Geltungsbereich</h2>

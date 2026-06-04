@@ -2,7 +2,9 @@
 	<header class="home-main">
 		<div class="max-width">
 			<div class="logo">
-				<img src="/images/logo-white.svg" alt="Crewlink" />
+				<router-link :to="{ name: 'home' }">
+					<img src="/images/logo-white.svg" alt="Crewlink" />
+				</router-link>
 			</div>
 
 			<div class="content">
@@ -26,7 +28,8 @@
 			</div>
 
 			<div class="hero">
-				<img src="/images/screenshots/main-with-hand.webp" alt="Screenshot" />
+				<img src="/images/screenshots/main-with-hand.webp"
+				     alt="Crewlink-App auf dem Smartphone: Event-Feed mit Veranstaltungen und Helfer-Angeboten" />
 			</div>
 		</div>
 	</header>
@@ -63,6 +66,7 @@
 					:width="searchHelpersMockup.width"
 					:height="searchHelpersMockup.height"
 					alt=""
+					aria-hidden="true"
 				/>
 			</div>
 
@@ -83,6 +87,7 @@
 					:width="trustScoreMockup.width"
 					:height="trustScoreMockup.height"
 					alt=""
+					aria-hidden="true"
 				/>
 			</div>
 
@@ -98,20 +103,20 @@
 	<section class="content-section other-features-section">
 		<ul class="max-width features">
 			<li class="feature">
-				<div class="icon"><ChatIcon /></div>
-				<h4>Chats</h4>
+				<div class="icon" aria-hidden="true"><ChatIcon /></div>
+				<h4>Chats mit Helfern</h4>
 				<p>Direktnachrichten mit Helfern sind natürlich inklusive</p>
 			</li>
 
 			<li class="feature">
-				<div class="icon"><NotificationIcon /></div>
-				<h4>Benachrichtigungen</h4>
+				<div class="icon" aria-hidden="true"><NotificationIcon /></div>
+				<h4>Benachrichtigungen zu Helfern</h4>
 				<p>Du erfährst sofort, wenn sich Helfer melden</p>
 			</li>
 
 			<li class="feature">
-				<div class="icon"><ProfileIcon /></div>
-				<h4>Profil</h4>
+				<div class="icon" aria-hidden="true"><ProfileIcon /></div>
+				<h4>Profil für Veranstalter</h4>
 				<p>Teile der Community mit, welche Art von Events zu veranstaltest</p>
 			</li>
 		</ul>
@@ -131,6 +136,7 @@
 					:width="findEventsMockup.width"
 					:height="findEventsMockup.height"
 					alt=""
+					aria-hidden="true"
 				/>
 			</div>
 
@@ -151,6 +157,7 @@
 					:width="planHelpMockup.width"
 					:height="planHelpMockup.height"
 					alt=""
+					aria-hidden="true"
 				/>
 			</div>
 
@@ -166,20 +173,20 @@
 	<section class="content-section other-features-section">
 		<ul class="max-width features">
 			<li class="feature">
-				<div class="icon"><ChatIcon /></div>
-				<h4>Chats</h4>
+				<div class="icon" aria-hidden="true"><ChatIcon /></div>
+				<h4>Chats mit Veranstaltern</h4>
 				<p>Direktnachrichten mit Veranstaltern sind natürlich inklusive</p>
 			</li>
 
 			<li class="feature">
-				<div class="icon"><NotificationIcon /></div>
-				<h4>Benachrichtigungen</h4>
+				<div class="icon" aria-hidden="true"><NotificationIcon /></div>
+				<h4>Benachrichtigungen zu Veranstaltern</h4>
 				<p>Du erfährst sofort, wenn sich Veranstalter melden</p>
 			</li>
 
 			<li class="feature">
-				<div class="icon"><ProfileIcon /></div>
-				<h4>Profil</h4>
+				<div class="icon" aria-hidden="true"><ProfileIcon /></div>
+				<h4>Profil für Helfer</h4>
 				<p>Teile der Community mit, was du anzubieten hast</p>
 			</li>
 		</ul>
@@ -253,6 +260,11 @@
 
 <style>
 	header.home-main {
+
+		.logo a {
+			text-decoration: none;
+		}
+
 		background: url("/images/header.webp");
 		background-position: center;
 		background-size: cover;

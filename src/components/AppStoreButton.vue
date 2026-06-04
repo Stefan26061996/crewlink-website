@@ -1,12 +1,20 @@
 <template>
     <div class="crewlink-app-store-button">
-	    <a aria-label="Download im App Store, iPhone und iPad" href="">
-		    <img src="/images/stores/get-on-app-store.svg" alt="App Store" />
+	    <a aria-label="Download im App Store, iPhone und iPad"
+	       aria-describedby="app-store-requirements"
+	       :href="STORE_IOS_URL"
+	       rel="noopener noreferrer"
+	       target="_blank">
+		    <img src="/images/stores/get-on-app-store.svg" alt="" />
 	    </a>
 
-	    <span class="requirements">iOS 17 oder neuer</span>
+	    <span id="app-store-requirements" class="requirements">iOS 17 oder neuer</span>
     </div>
 </template>
+
+<script setup lang="ts">
+	import { STORE_IOS_URL } from '../config/links'
+</script>
 
 <style>
     .crewlink-app-store-button {

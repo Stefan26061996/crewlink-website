@@ -6,7 +6,7 @@
 		v-bind="$attrs"
 		@click="onClick"
 	>
-		<span v-if="$slots.icon" class="icon">
+		<span v-if="$slots.icon" class="icon" aria-hidden="true">
 			<slot name="icon" />
 		</span>
 
@@ -20,7 +20,7 @@
 		:to="to!"
 		:class="buttonClass"
 	>
-		<span v-if="$slots.icon" class="icon">
+		<span v-if="$slots.icon" class="icon" aria-hidden="true">
 			<slot name="icon" />
 		</span>
 
