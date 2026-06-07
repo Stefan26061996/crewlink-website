@@ -44,6 +44,16 @@ declare module '@/assets/screenshots/collaboration-equipment-android-de.png?mock
 	export default meta
 }
 
+declare module '@/assets/screenshots/feed-filters-ios-de.png?mockup=iphone17pro&preset=special-feature-left&format=webp&w=600' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
+declare module '@/assets/screenshots/chats-ios-de.png?mockup=iphone17pro&preset=special-feature-right&format=webp&w=600' {
+	const meta: DeviceMockupMeta
+	export default meta
+}
+
 interface ImportMetaEnv {
 	readonly BASE_URL: string
 }
