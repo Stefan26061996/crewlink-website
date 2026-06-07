@@ -17,14 +17,29 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Force Mesa software rendering — GitHub Actions runners have no GPU.
+      LIBGL_ALWAYS_SOFTWARE: '1'
     steps:
       - uses: actions/checkout@v4
+      - name: Install OpenGL dependencies for headless mockup rendering
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            xvfb \
+            libgl1-mesa-dri \
+            libglapi-mesa \
+            libosmesa6 \
+            libglew-dev \
+            libglu1-mesa-dev \
+            libxi-dev \
+            mesa-utils
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
