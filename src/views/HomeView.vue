@@ -16,7 +16,7 @@
 					Oder finde Events, bei denen du aushelfen kannst.
 				</p>
 
-				<ul class="stores">
+				<!--<ul class="stores">
 					<li>
 						<GooglePlayButton />
 					</li>
@@ -24,6 +24,10 @@
 					<li>
 						<AppStoreButton />
 					</li>
+				</ul>-->
+
+				<ul class="stores">
+					<li style="font-size:1.4rem;"">Bald verfügbar für Android &amp; iOS!</li>
 				</ul>
 			</div>
 
@@ -237,13 +241,14 @@
 		<h2>Jetzt herunterladen und anmelden!</h2>
 
 		<ul class="platforms">
-			<li>
+			<!--<li>
 				<GooglePlayButton />
 			</li>
 
 			<li>
 				<AppStoreButton />
-			</li>
+			</li>-->
+			<li style="font-size:1.4rem;"">Bald verfügbar für Android &amp; iOS!</li>
 		</ul>
 	</section>
 </template>
