@@ -1,0 +1,39 @@
+{
+	"name": "crewlink-website",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc -b && vite build && cp dist/index.html dist/404.html",
+		"preview": "vite preview",
+		"generate:pixel-device": "tsx scripts/generate-pixel-device.ts",
+		"generate:screenshots": "tsx scripts/generate-screenshots.ts",
+		"prepare:iphone-glb": "tsx scripts/prepare-iphone-glb.ts",
+		"render-mockups": "tsx scripts/render-mockups.ts"
+	},
+	"dependencies": {
+		"vue": "^3.5.13",
+		"vue-router": "^4.5.0"
+	},
+	"devDependencies": {
+		"@gltf-transform/core": "^4.3.0",
+		"@gltf-transform/extensions": "^4.3.0",
+		"@gltf-transform/functions": "^4.3.0",
+		"@types/gl": "^6.0.5",
+		"@types/node": "^22.19.19",
+		"@types/three": "^0.160.0",
+		"@vitejs/plugin-vue": "^5.2.1",
+		"@vue/tsconfig": "^0.7.0",
+		"canvas": "^3.2.3",
+		"draco3dgltf": "^1.5.7",
+		"gl": "^8.1.6",
+		"sharp": "^0.34.5",
+		"three": "^0.160.1",
+		"tsx": "^4.22.4",
+		"typescript": "~5.7.2",
+		"vite": "^6.0.5",
+		"vite-svg-loader": "^5.1.1",
+		"vue-tsc": "^2.2.0"
+	}
+}
