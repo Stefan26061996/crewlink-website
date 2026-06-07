@@ -254,8 +254,8 @@
 </template>
 
 <script setup lang="ts">
-	import GooglePlayButton from '../components/GooglePlayButton.vue'
-	import AppStoreButton from '../components/AppStoreButton.vue'
+	/*import GooglePlayButton from '../components/GooglePlayButton.vue'
+	import AppStoreButton from '../components/AppStoreButton.vue'*/
 	import Typewriter from '../components/Typewriter.vue'
 	import ChatIcon from '../assets/icons/chat.svg'
 	import NotificationIcon from '../assets/icons/notification.svg'
