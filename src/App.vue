@@ -100,6 +100,10 @@
 		}
 	}
 
+	strong {
+		font-weight: 750 !important;
+	}
+
 	.crewlink-button,
 	.crewlink-app-store-button a,
 	.crewlink-google-play-button a,

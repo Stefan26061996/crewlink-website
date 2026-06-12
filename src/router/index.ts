@@ -63,6 +63,12 @@ const routes: RouteRecordRaw[] = [
 		component: () => import('../views/OpenInAppView.vue'),
 		meta: { title: 'In Crewlink öffnen', deepLink: true },
 	},
+	{
+		path: '/redeem.html',
+		name: 'redeem-code',
+		component: () => import('../views/RedeemView.vue'),
+		meta: { title: 'Code einlösen' },
+	},
 ]
 
 const router = createRouter({
