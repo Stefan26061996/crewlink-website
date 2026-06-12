@@ -17,6 +17,18 @@ export function isAndroidUserAgent(ua: string): boolean {
 	return /android/i.test(ua)
 }
 
+export function isIosUserAgent(ua: string): boolean {
+	return /iphone|ipad|ipod/i.test(ua)
+}
+
+export const IOS_APP_SCHEME = 'crewlink' as const
+
+export function buildIosAppUrl(path: string): string {
+	const normalizedPath = path.startsWith('/') ? path : `/${path}`
+	const params = new URLSearchParams({ path: normalizedPath })
+	return `${IOS_APP_SCHEME}://open?${params.toString()}`
+}
+
 export function buildAndroidIntentUrl(params: {
 	path: string
 	host: string
