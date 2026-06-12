@@ -16,7 +16,7 @@
 					Oder finde Events, bei denen du aushelfen kannst.
 				</p>
 
-				<!--<ul class="stores">
+				<ul class="stores">
 					<li>
 						<GooglePlayButton />
 					</li>
@@ -24,10 +24,6 @@
 					<li>
 						<AppStoreButton />
 					</li>
-				</ul>-->
-
-				<ul class="stores">
-					<li style="font-size:1.4rem;">Bald verfügbar für Android &amp; iOS!</li>
 				</ul>
 			</div>
 
@@ -241,21 +237,20 @@
 		<h2>Jetzt herunterladen und anmelden!</h2>
 
 		<ul class="platforms">
-			<!--<li>
+			<li>
 				<GooglePlayButton />
 			</li>
 
 			<li>
 				<AppStoreButton />
-			</li>-->
-			<li style="font-size:1.4rem;"">Bald verfügbar für Android &amp; iOS!</li>
+			</li>
 		</ul>
 	</section>
 </template>
 
 <script setup lang="ts">
-	/*import GooglePlayButton from '../components/GooglePlayButton.vue'
-	import AppStoreButton from '../components/AppStoreButton.vue'*/
+	import GooglePlayButton from '../components/GooglePlayButton.vue'
+	import AppStoreButton from '../components/AppStoreButton.vue'
 	import Typewriter from '../components/Typewriter.vue'
 	import ChatIcon from '../assets/icons/chat.svg'
 	import NotificationIcon from '../assets/icons/notification.svg'
