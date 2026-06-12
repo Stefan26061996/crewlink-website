@@ -282,6 +282,7 @@
 <style>
 	header.home-main {
 		overflow: hidden;
+		position: relative;
 
 		.logo a {
 			text-decoration: none;
@@ -309,6 +310,8 @@
 			padding-right: 16px;
 			max-width: calc(100% - 312px);
 			transition: max-width 0.2s, padding 0.2s;
+			position: relative;
+			z-index: 2;
 
 			h1, p {
 				font-size: clamp(1rem, 4vw, 2rem);
@@ -329,6 +332,7 @@
 			right: 0;
 			margin-bottom: -6px;
 			text-align: right;
+			z-index: 1;
 
 			transition: right 0.2s, bottom 0.2s;
 
@@ -376,7 +380,7 @@
 				right: 24px;
 
 				img {
-					width: 67%;
+					width: 60%;
 				}
 			}
 		}
