@@ -27,7 +27,7 @@
 				</ul>-->
 
 				<ul class="stores">
-					<li style="font-size:1.4rem;"">Bald verfügbar für Android &amp; iOS!</li>
+					<li style="font-size:1.4rem;">Bald verfügbar für Android &amp; iOS!</li>
 				</ul>
 			</div>
 
