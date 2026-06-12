@@ -17,7 +17,7 @@
 
 	const redeemUrl = computed(() => {
 		if (platform.value === 'android') return `https://play.google.com/redeem?code=${code.value}`
-		if (platform.value === 'ios') return `https://apps.apple.com/redeem?code=${code.value}`
+		if (platform.value === 'ios') return `https://apps.apple.com/redeem?ctx=offercodes&id=6766081864&code=${code.value}`
 
 		return ''
 	})
