@@ -1,6 +1,22 @@
 <template>
+	<button
+		v-if="!href && !to"
+		type="button"
+		:class="buttonClass"
+		v-bind="$attrs"
+		@click="onClick"
+	>
+		<span v-if="$slots.icon" class="icon" aria-hidden="true">
+			<slot name="icon" />
+		</span>
+
+		<span class="label">
+			<slot />
+		</span>
+	</button>
+
 	<a
-		v-if="href"
+		v-else-if="href"
 		:href="href"
 		:class="buttonClass"
 		v-bind="$attrs"
@@ -19,6 +35,7 @@
 		v-else
 		:to="to!"
 		:class="buttonClass"
+		@click="onClick"
 	>
 		<span v-if="$slots.icon" class="icon" aria-hidden="true">
 			<slot name="icon" />
@@ -68,6 +85,9 @@
 		gap: 8px;
 		color: var(--text-primary-color);
 		text-decoration: none;
+		border: none;
+		font: inherit;
+		cursor: pointer;
 
 		.icon {
 			display: inline-block;

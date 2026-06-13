@@ -8,19 +8,31 @@
 	const platform = computed(() => route.query.platform as string | undefined)
 	const code = computed(() => route.query.code as string | undefined)
 
-	const inPlatform = computed(() => {
-		if (platform.value === 'android') return 'im Play Store'
-		if (platform.value === 'ios') return 'im App Store'
-
-		return ''
-	})
-
 	const redeemUrl = computed(() => {
 		if (platform.value === 'android') return `https://play.google.com/redeem?code=${code.value}`
 		if (platform.value === 'ios') return `https://apps.apple.com/redeem?ctx=offercodes&id=6766081864&code=${code.value}`
 
 		return ''
 	})
+
+	const copyCode = async () => {
+		const value = code.value
+		if (!value) return
+
+		try {
+			await navigator.clipboard.writeText(value)
+		} catch {
+			const textarea = document.createElement('textarea')
+			textarea.value = value
+			textarea.setAttribute('readonly', '')
+			textarea.style.position = 'fixed'
+			textarea.style.left = '-9999px'
+			document.body.appendChild(textarea)
+			textarea.select()
+			document.execCommand('copy')
+			document.body.removeChild(textarea)
+		}
+	}
 </script>
 
 <template>
@@ -35,30 +47,55 @@
 			<strong>Als Dank für deine Teilnahme am Testprogramm erhältst du einen lebenslangen Crewlink Pro-Zugang.</strong>
 		</p>
 
-		<p>
-			Dein Code ist nur einmalig einlösbar. Bitte teile ihn nicht weiter. Um deinen Zugang nach dem Einlösen
-			zu aktivieren, tippe auf "Wiederherstellen" innerhalb der App.
-		</p>
+		<template v-if="platform == 'ios'">
+			<p>
+				Dein Code ist nur einmalig einlösbar. Bitte teile ihn nicht weiter. Um deinen Zugang nach dem Einlösen
+				zu aktivieren, tippe auf "Wiederherstellen" innerhalb der App.
+			</p>
 
-		<div class="warning" v-if="platform === 'ios'">
-			<AlertRhombus class="icon" />
+			<div class="warning">
+				<AlertRhombus class="icon" />
+
+				<p>
+					Um den Code aktivieren zu können, benötigst du die App Store-Version von Crewlink, <strong>nicht die Testflight-Version</strong>.
+				</p>
+			</div>
+
+			<p class="secondary info">
+				Klicke auf den Button, um deinen Code im App Store einzulösen.
+			</p>
+		</template>
+
+		<template v-else-if="platform == 'android'">
+			<p>
+				Dein Code ist nur einmalig einlösbar. Bitte teile ihn nicht weiter.
+			</p>
 
 			<p>
-				Um den Code aktivieren zu können, benötigst du die App Store-Version von Crewlink, <strong>nicht die Testflight-Version</strong>.
+				Um deinen Code einzulösen, befolge diese Schritte:
 			</p>
-		</div>
+
+			<ol>
+				<li>Kopiere den Code von dieser Seite (siehe unten).</li>
+				<li>Öffne die Crewlink-App, öffne dein Profil und tippe auf den Button zum Kaufen von Crewlink Pro.</li>
+				<li>Wähle "Lifetime Pro" und tippe auf "Kostenpflichtig kaufen".</li>
+				<li>In dem erscheinenden Dialog, tippe auf den Pfeil neben deiner Zahlungsmethode.</li>
+				<li>Tippe auf "Code einlösen".</li>
+				<li>Füge den kopierten Code in das Feld ein und löse ihn ein.</li>
+			</ol>
+		</template>
 
 		<p class="secondary info">
-			Klicke auf den Button, um deinen Code {{ inPlatform }} einzulösen.
-		</p>
-
-		<p class="secondary info">
-			Dein Code: <code>{{ code }}</code> 
+			Dein Code: <code>{{ code }}</code>
 		</p>
 
 		<div class="actions">
-			<Button :href="redeemUrl" type="primary" class="redeem-button" size="large">
+			<Button :href="redeemUrl" type="primary" class="redeem-button" size="large" v-if="platform == 'ios'">
 				Code einlösen
+			</Button>
+
+			<Button @click="copyCode" type="primary" class="redeem-button" size="large" v-else-if="platform == 'android'">
+				Code kopieren
 			</Button>
 		</div>
 	</div>
@@ -106,12 +143,34 @@
 			}
 		}
 
+		ol {
+			list-style-type: decimal;
+			margin-left: 20px;
+
+			li {
+				padding-left: 8px;
+
+				&::marker {
+					font-weight: 700;
+				}
+
+				& + li {
+					margin-top: 16px;
+				}
+			}
+
+			p + &,
+			& + p {
+				margin-top: 16px;
+			}
+		}
+
 		.warning {
 			--background: oklch(from var(--page-background) calc(l * 2.6) calc(c * 0.8) h);
 
 			background: var(--background);
 			color: var(--primary-color);
-			
+
 			padding: 12px 16px;
 			border-radius: var(--container-border-radius);
 
