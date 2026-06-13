@@ -58,7 +58,8 @@
 	:root {
 		--primary-color: #1A237E;
 		--page-background: #1B2480;
-		--text-primary-color: color-mix(#ffffff 90%, var(--primary-color));
+		/* 90% white + 10% primary; static fallback for browsers without color-mix() */
+		--text-primary-color: #E8E9F2;
 		--text-secondary-color: #A1A7E6;
 
 		--size-text-main: 1rem;
@@ -68,6 +69,12 @@
 
 		--container-border-radius: 12px;
 		--container-border-color: oklch(from var(--page-background) calc(l * 1.5) calc(c * 1.67) h);
+	}
+
+	@supports (color: color-mix(in srgb, white, black)) {
+		:root {
+			--text-primary-color: color-mix(in srgb, #ffffff 90%, var(--primary-color));
+		}
 	}
 
 	html, body {
