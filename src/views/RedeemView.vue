@@ -15,6 +15,9 @@
 		return ''
 	})
 
+	const betaUrl = 'https://play.google.com/apps/testing/com.crewlink.eventify'
+	const androidUrl = 'https://play.google.com/store/apps/details?id=com.crewlink.eventify'
+
 	const copyCode = async () => {
 		const value = code.value
 		if (!value) return
@@ -76,6 +79,7 @@
 			</p>
 
 			<ol>
+				<li><a :href="betaUrl" target="_blank">Tritt dem öffentlichen Beta-Test von Crewlink bei</a> oder <a :href="androidUrl">installiere die Release-Version aus dem Play Store</a>.</li>
 				<li>Kopiere den Code von dieser Seite (siehe unten).</li>
 				<li>Öffne die Crewlink-App, öffne dein Profil und tippe auf den Button zum Kaufen von Crewlink Pro.</li>
 				<li>Wähle "Lifetime Pro" und tippe auf "Kostenpflichtig kaufen".</li>
@@ -83,6 +87,15 @@
 				<li>Tippe auf "Code einlösen".</li>
 				<li>Füge den kopierten Code in das Feld ein und löse ihn ein.</li>
 			</ol>
+
+			<div class="warning">
+				<AlertRhombus class="icon" />
+
+				<p>
+					Falls du einen Testkauf siehst, bist du noch im internen Test. Deinstalliere die App,
+					<a :href="betaUrl" target="_blank">tritt dem Beta-Test bei</a> und installiere die App erneut.
+				</p>
+			</div>
 		</template>
 
 		<p class="secondary info">
@@ -94,7 +107,14 @@
 				Code einlösen
 			</Button>
 
-			<Button @click="copyCode" type="primary" class="redeem-button" size="large" v-else-if="platform == 'android'">
+			<Button :href="betaUrl"
+			        type="primary"
+			        class="beta-button"
+			        v-if="platform == 'android'">
+				Beta beitreten
+			</Button>
+
+			<Button @click="copyCode" type="primary" class="redeem-button" size="large" v-if="platform == 'android'">
 				Code kopieren
 			</Button>
 		</div>
@@ -192,9 +212,19 @@
 			p {
 				flex: 1;
 			}
+
+			a {
+				color: inherit;
+				font-weight: 600;
+			}
 		}
 
 		.actions {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 16px;
+
 			margin-top: 32px;
 			text-align: center;
 		}
