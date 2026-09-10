@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studentenstatus</title>
+  <style>
+    body { font-family: system-ui, sans-serif; text-align: center; padding: 2rem; color: #1a237e; }
+    p { margin: 0.75rem 0; line-height: 1.45; }
+    .muted { color: #5c6bc0; }
+    .error { color: #b71c1c; }
+  </style>
+</head>
+<body>
+  <p id="status" class="muted">Studentenstatus wird geprüft…</p>
+  <p id="detail" hidden></p>
+  <script>
+    (function () {
+      // Complete HTTP endpoint (Firebase Functions v2 default region: us-central1).
+      // Project: eventify-theapp (.firebaserc / firebase_options.dart).
+      // Staging: if Functions are deployed to another project or region, change REGION/PROJECT below.
+      // Format: https://REGION-PROJECT_ID.cloudfunctions.net/completeStudentEmailVerification
+      var COMPLETE_URL =
+        'https://us-central1-eventify-theapp.cloudfunctions.net/completeStudentEmailVerification';
+
+      var statusEl = document.getElementById('status');
+      var detailEl = document.getElementById('detail');
+
+      function setUi(title, detail, isError) {
+        statusEl.textContent = title;
+        statusEl.className = isError ? 'error' : '';
+        if (detail) {
+          detailEl.hidden = false;
+          detailEl.textContent = detail;
+          detailEl.className = isError ? 'error' : 'muted';
+        } else {
+          detailEl.hidden = true;
+        }
+      }
+
+      function leaveSoon() {
+        setTimeout(function () {
+          try { window.close(); } catch (e) {}
+          try {
+            if (window.history.length > 1) {
+              window.history.back();
+            } else {
+              window.location.replace('about:blank');
+            }
+          } catch (e2) {}
+        }, 2500);
+      }
+
+      function messageForError(code) {
+        switch (code) {
+          case 'deadline-exceeded':
+            return 'Dieser Link ist abgelaufen. Bitte starte die Verifizierung erneut in der App.';
+          case 'already-exists':
+            return 'Diese Hochschul-E-Mail ist bereits mit einem anderen Konto verknüpft.';
+          case 'failed-precondition-business':
+            return 'Studentenstatus ist für Business-Konten nicht verfügbar.';
+          case 'not-found':
+          case 'invalid-argument':
+            return 'Dieser Link ist ungültig oder wurde bereits verwendet.';
+          case 'method-not-allowed':
+          case 'internal':
+          default:
+            return 'Die Bestätigung ist fehlgeschlagen. Bitte versuche es später erneut oder starte die Verifizierung neu in der App.';
+        }
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var code = (params.get('code') || '').trim();
+      var email = (params.get('email') || '').trim();
+
+      if (!code || !email) {
+        setUi(
+          'Link unvollständig.',
+          'Bitte öffne den Link aus der Verifizierungs-E-Mail erneut.',
+          true,
+        );
+        return;
+      }
+
+      var url =
+        COMPLETE_URL +
+        '?code=' + encodeURIComponent(code) +
+        '&email=' + encodeURIComponent(email);
+
+      fetch(url, {
+        method: 'GET',
+        credentials: 'omit',
+        headers: { Accept: 'application/json' },
+      })
+        .then(function (res) {
+          return res.json().then(function (body) {
+            return { okHttp: res.ok, body: body || {} };
+          }).catch(function () {
+            return { okHttp: res.ok, body: {} };
+          });
+        })
+        .then(function (result) {
+          var body = result.body;
+          if (body.ok === true) {
+            setUi(
+              'Studentenstatus bestätigt.',
+              'Du kannst dieses Fenster schließen und zur Crewlink-App zurückwechseln.',
+              false,
+            );
+            leaveSoon();
+            return;
+          }
+          var errCode = typeof body.error === 'string' ? body.error : 'internal';
+          setUi('Bestätigung fehlgeschlagen.', messageForError(errCode), true);
+        })
+        .catch(function () {
+          setUi(
+            'Bestätigung fehlgeschlagen.',
+            'Die Anfrage konnte nicht abgeschlossen werden. Bitte prüfe deine Verbindung und versuche es erneut.',
+            true,
+          );
+        });
+    })();
+  </script>
+</body>
+</html>
