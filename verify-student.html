@@ -9,11 +9,30 @@
     p { margin: 0.75rem 0; line-height: 1.45; }
     .muted { color: #5c6bc0; }
     .error { color: #b71c1c; }
+    .actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; align-items: center; }
+    .actions a {
+      display: inline-block;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      min-width: 12rem;
+    }
+    .actions a.primary {
+      background: #1a237e;
+      color: #fff;
+    }
+    .actions a.secondary {
+      background: transparent;
+      color: #1a237e;
+      border: 1px solid #9fa8da;
+    }
   </style>
 </head>
 <body>
   <p id="status" class="muted">Studentenstatus wird geprüft…</p>
   <p id="detail" hidden></p>
+  <div id="actions" class="actions" hidden></div>
   <script>
     (function () {
       // Complete HTTP endpoint (Firebase Functions v2 default region: us-central1).
@@ -22,9 +41,12 @@
       // Format: https://REGION-PROJECT_ID.cloudfunctions.net/completeStudentEmailVerification
       var COMPLETE_URL =
         'https://us-central1-eventify-theapp.cloudfunctions.net/completeStudentEmailVerification';
+      var HOME_URL = 'https://crewlink.cloud/';
+      var APP_CHECKOUT_SCHEME = 'crewlink://open?path=/pro-checkout';
 
       var statusEl = document.getElementById('status');
       var detailEl = document.getElementById('detail');
+      var actionsEl = document.getElementById('actions');
 
       function setUi(title, detail, isError) {
         statusEl.textContent = title;
@@ -38,17 +60,21 @@
         }
       }
 
-      function leaveSoon() {
-        setTimeout(function () {
-          try { window.close(); } catch (e) {}
-          try {
-            if (window.history.length > 1) {
-              window.history.back();
-            } else {
-              window.location.replace('about:blank');
-            }
-          } catch (e2) {}
-        }, 2500);
+      function showSuccessActions() {
+        actionsEl.hidden = false;
+        actionsEl.innerHTML = '';
+
+        var home = document.createElement('a');
+        home.className = 'primary';
+        home.href = HOME_URL;
+        home.textContent = 'Crewlink öffnen';
+        actionsEl.appendChild(home);
+
+        var appOpen = document.createElement('a');
+        appOpen.className = 'secondary';
+        appOpen.href = APP_CHECKOUT_SCHEME;
+        appOpen.textContent = 'In App öffnen';
+        actionsEl.appendChild(appOpen);
       }
 
       function messageForError(code) {
@@ -103,11 +129,11 @@
           var body = result.body;
           if (body.ok === true) {
             setUi(
-              'Studentenstatus bestätigt.',
-              'Du kannst dieses Fenster schließen und zur Crewlink-App zurückwechseln.',
+              'Studentenstatus bestätigt — öffne die Crewlink-App.',
+              'Du kannst danach in der App fortfahren. Bei Bedarf unten die Website oder die App öffnen.',
               false,
             );
-            leaveSoon();
+            showSuccessActions();
             return;
           }
           var errCode = typeof body.error === 'string' ? body.error : 'internal';
