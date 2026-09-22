@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crewlink — Einladung</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --primary: #1a237e;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --error: #b91c1c;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      max-width: 420px;
+      width: 100%;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 28px rgba(26, 35, 126, 0.12);
+      text-align: center;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 10px;
+      color: var(--primary);
+    }
+    p {
+      margin: 0.65rem 0;
+      line-height: 1.5;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+    .code-block {
+      margin: 18px 0 8px;
+      padding: 14px 12px;
+      border: 1px dashed #9fa8da;
+      border-radius: 12px;
+      background: #f8f9ff;
+    }
+    .code-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+    .code-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      word-break: break-all;
+      user-select: all;
+    }
+    .code-hint {
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+    .actions {
+      margin-top: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: stretch;
+    }
+    .actions a,
+    .actions button {
+      display: inline-block;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+    }
+    .actions a.primary,
+    .actions button.primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .actions a.secondary,
+    .actions button.secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid #9fa8da;
+    }
+    .error { color: var(--error); }
+    .hidden { display: none; }
+    .copy-status {
+      min-height: 1.25rem;
+      font-size: 0.88rem;
+      margin: 4px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Crewlink</div>
+    <h1 id="title">Crewlink installieren</h1>
+    <p id="subtitle">
+      Du wirst weitergeleitet… Die Belohnung gilt nur für neue Mitglieder
+      (Profil-Onboarding noch nicht abgeschlossen).
+    </p>
+
+    <div id="codeBlock" class="code-block hidden">
+      <p class="code-label">Dein Einladungscode</p>
+      <div id="codeValue" class="code-value" aria-live="polite"></div>
+      <p id="codeHint" class="code-hint">
+        Merke dir den Code oder kopiere ihn — besonders wichtig auf dem iPhone,
+        falls die App die Einladung nach dem Store-Install nicht automatisch erkennt.
+      </p>
+      <p id="copyStatus" class="copy-status" aria-live="polite"></p>
+    </div>
+
+    <div id="actions" class="actions"></div>
+  </div>
+
+  <script>
+    (function () {
+      var PLAY_PACKAGE = 'com.crewlink.eventify';
+      var PLAY_BASE =
+        'https://play.google.com/store/apps/details?id=' + PLAY_PACKAGE;
+      // Öffentliche App-Store-URL (crewlink.cloud / ASC id6766081864).
+      var APP_STORE_URL = 'https://apps.apple.com/app/crewlink/id6766081864';
+      var COOKIE_NAME = 'crewlink_invite_code';
+      var STORAGE_KEY = 'crewlink_invite_code';
+      var COOKIE_MAX_AGE_SEC = 30 * 24 * 60 * 60;
+      var REDIRECT_DELAY_MS = 1000;
+
+      var subtitleEl = document.getElementById('subtitle');
+      var codeBlockEl = document.getElementById('codeBlock');
+      var codeValueEl = document.getElementById('codeValue');
+      var codeHintEl = document.getElementById('codeHint');
+      var copyStatusEl = document.getElementById('copyStatus');
+      var actionsEl = document.getElementById('actions');
+
+      function parseInviteCode() {
+        // Query (?code=) für SPA-Redirect von /invite/<code> auf GitHub Pages.
+        try {
+          var params = new URLSearchParams(window.location.search || '');
+          var fromQuery = (params.get('code') || '').trim();
+          if (fromQuery) return fromQuery;
+        } catch (e0) { /* ignore */ }
+        var path = window.location.pathname || '';
+        // cleanUrls / rewrite: /invite/<code> oder /invite.html
+        var match = path.match(/\/invite\/([^/]+)\/?$/i);
+        if (!match) return '';
+        try {
+          return decodeURIComponent(match[1]).trim();
+        } catch (e) {
+          return String(match[1] || '').trim();
+        }
+      }
+
+      function isValidCode(code) {
+        if (!code) return false;
+        // Stabiler Server-Code (ST-4): alphanumerisch inkl. Bindestrich/Unterstrich.
+        return /^[A-Za-z0-9_-]{4,64}$/.test(code);
+      }
+
+      function isIos() {
+        var ua = navigator.userAgent || '';
+        return /iPad|iPhone|iPod/.test(ua) ||
+          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      }
+
+      function isAndroid() {
+        return /Android/i.test(navigator.userAgent || '');
+      }
+
+      function setCookie(code) {
+        var parts = [
+          COOKIE_NAME + '=' + encodeURIComponent(code),
+          'Max-Age=' + COOKIE_MAX_AGE_SEC,
+          'Path=/',
+          'SameSite=Lax',
+          'Secure',
+        ];
+        var host = (window.location.hostname || '').toLowerCase();
+        if (host === 'crewlink.cloud' || host.endsWith('.crewlink.cloud')) {
+          parts.push('Domain=.crewlink.cloud');
+        }
+        document.cookie = parts.join('; ');
+      }
+
+      function persistInviteCode(code) {
+        try {
+          localStorage.setItem(STORAGE_KEY, code);
+        } catch (e) { /* private mode */ }
+        try {
+          setCookie(code);
+        } catch (e2) { /* ignore */ }
+      }
+
+      function playStoreUrl(code) {
+        if (!code) return PLAY_BASE;
+        var referrer =
+          'utm_source=invite&utm_content=' + encodeURIComponent(code);
+        return PLAY_BASE + '&referrer=' + encodeURIComponent(referrer);
+      }
+
+      function storeUrlForOs(code) {
+        if (isIos()) return APP_STORE_URL;
+        if (isAndroid()) return playStoreUrl(code);
+        return '';
+      }
+
+      function deepLinkUrl(code) {
+        return 'crewlink://open?path=/invite/' + encodeURIComponent(code);
+      }
+
+      async function renderStoreActions(code) {
+        actionsEl.innerHTML = '';
+        // Primary = OS-Store mit Fallback-Wording; Secondary = anderer Store.
+        // Store-first: kein Auto-Scheme; „In App“ nur via maybeAddOpenInApp.
+        if (isIos()) {
+          addLink('primary', APP_STORE_URL, 'Wenn nichts passiert, hier tippen');
+          addLink('secondary', playStoreUrl(code), 'Google Play öffnen');
+        } else {
+          addLink('primary', playStoreUrl(code), 'Wenn nichts passiert, hier tippen');
+          addLink('secondary', APP_STORE_URL, 'App Store öffnen');
+        }
+        if (code) {
+          addButton('secondary', 'Code kopieren', function () {
+            copyCode(code);
+          });
+          await maybeAddOpenInApp(code);
+        }
+      }
+
+      /**
+       * „In App öffnen“ nur wenn Install prüfbar und positiv
+       * (navigator.getInstalledRelatedApps — typisch Android + DAL).
+       * Ohne related_applications / assetlinks oft []; iOS: API fehlt → kein Button.
+       */
+      async function maybeAddOpenInApp(code) {
+        if (!navigator.getInstalledRelatedApps) return;
+        try {
+          var apps = await navigator.getInstalledRelatedApps();
+          if (!apps || !apps.length) return;
+          addButton('secondary', 'In App öffnen', function () {
+            tryOpenApp(code);
+          });
+        } catch (e) { /* ignore */ }
+      }
+
+      function addLink(className, href, text) {
+        var a = document.createElement('a');
+        a.className = className;
+        a.href = href;
+        a.textContent = text;
+        a.rel = 'noopener noreferrer';
+        actionsEl.appendChild(a);
+        return a;
+      }
+
+      function addButton(className, text, onClick) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = className;
+        btn.textContent = text;
+        btn.addEventListener('click', onClick);
+        actionsEl.appendChild(btn);
+        return btn;
+      }
+
+      function copyCode(code) {
+        function ok() {
+          copyStatusEl.textContent = 'Code in die Zwischenablage kopiert.';
+          copyStatusEl.className = 'copy-status';
+        }
+        function fail() {
+          copyStatusEl.textContent =
+            'Kopieren nicht möglich — bitte Code merken oder manuell markieren.';
+          copyStatusEl.className = 'copy-status error';
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(ok).catch(fail);
+          return;
+        }
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = code;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          var success = document.execCommand('copy');
+          document.body.removeChild(ta);
+          if (success) ok();
+          else fail();
+        } catch (e) {
+          fail();
+        }
+      }
+
+      /**
+       * Custom-Scheme nur auf expliziten Klick („In App öffnen“).
+       * Kein Auto-Aufruf beim Load — sonst blockiert eine installierte App
+       * den Store-Redirect (Akquise-Funnel).
+       */
+      function tryOpenApp(code) {
+        var scheme = deepLinkUrl(code);
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = scheme;
+        document.body.appendChild(iframe);
+        window.setTimeout(function () {
+          try { document.body.removeChild(iframe); } catch (e) { /* ignore */ }
+        }, 1500);
+      }
+
+      var rawCode = parseInviteCode();
+      var code = isValidCode(rawCode) ? rawCode : '';
+
+      if (code) {
+        persistInviteCode(code);
+        codeBlockEl.classList.remove('hidden');
+        codeValueEl.textContent = code;
+
+        if (isIos()) {
+          codeHintEl.textContent =
+            'Wichtig auf dem iPhone: Code merken oder kopieren, dann App im ' +
+            'Store installieren. Nach der Installation ggf. den Code im Profil-Assistenten eingeben.';
+          // Deferred Bridge: Clipboard beim Landen setzen.
+          copyCode(code);
+        } else if (isAndroid()) {
+          codeHintEl.textContent =
+            'Android: Der Play-Store-Link enthält deine Einladung (Install Referrer). ' +
+            'Den Code trotzdem merken, falls die Attribution fehlschlägt.';
+        }
+
+        // Buttons zuerst (Fallback), dann ~1 s Auto-Redirect nur auf iOS/Android.
+        // Kein Auto-tryOpenApp — Store-first auch bei installierter App.
+        renderStoreActions(code);
+        var target = storeUrlForOs(code);
+        if (target) {
+          window.setTimeout(function () {
+            window.location.href = target;
+          }, REDIRECT_DELAY_MS);
+        }
+        return;
+      }
+
+      // Ungültig / leer: Erklärtext + „Freunde einladen“ → Store ohne Referrer.
+      // Kein Code-Block, kein Auto-Redirect mit Attribution, kein Fake-Deep-Link.
+      var invalidLead = rawCode
+        ? '<span class="error">Dieser Einladungslink ist ungültig oder unvollständig.</span><br>'
+        : '';
+      subtitleEl.innerHTML =
+        invalidLead +
+        'Die Belohnung gilt nur für neue Mitglieder: Nach dem Profilabschluss ' +
+        'erhältst du 14 Tage Crewlink Pro. Bestehende Mitglieder können Freunde einladen.';
+      // playStoreUrl('') === PLAY_BASE — ohne Invite-Referrer.
+      if (isIos()) {
+        addLink('primary', APP_STORE_URL, 'Freunde einladen');
+        addLink('secondary', PLAY_BASE, 'Google Play öffnen');
+      } else {
+        addLink('primary', PLAY_BASE, 'Freunde einladen');
+        addLink('secondary', APP_STORE_URL, 'App Store öffnen');
+      }
+    })();
+  </script>
+</body>
+</html>
