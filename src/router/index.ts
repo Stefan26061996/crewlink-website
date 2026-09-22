@@ -69,6 +69,12 @@ const routes: RouteRecordRaw[] = [
 		component: () => import('../views/RedeemView.vue'),
 		meta: { title: 'Code einlösen' },
 	},
+	{
+		path: '/invite/:code?',
+		name: 'invite-landing',
+		component: () => import('../views/InviteRedirectView.vue'),
+		meta: { title: 'Crewlink — Einladung', deepLink: true },
+	},
 ]
 
 const router = createRouter({
