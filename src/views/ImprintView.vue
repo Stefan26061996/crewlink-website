@@ -30,12 +30,13 @@
 			</address>
 
 			<p>
-				E-Mail: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a>
+				E-Mail: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a><br>
+				Telefon: <a href="tel:+4915110374749">+49 151 10374749</a>
 			</p>
 		</section>
 
 		<section class="text-content">
-			<h2>Verantwortlich für den Inhalt nach §55 Abs.2 RStV</h2>
+			<h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
 
 			<address>
 				Stefan Günther<br>

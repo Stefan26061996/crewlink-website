@@ -18,7 +18,8 @@
 
 	<div class="main-content max-width">
 		<h1>Datenschutzerklärung</h1>
-		<p class="document-date secondary"><em>Stand: Juni 2026</em></p>
+		<!-- TODO: Anwalt prüfen -->
+		<p class="secondary">Letzte Aktualisierung: 26. Oktober 2026 – Ergänzungen zu Vertragsgenerator und Selbstständigkeits-Guide.</p>
 
 		<section class="text-content">
 			<h2>1. Verantwortlicher</h2>
@@ -54,6 +55,9 @@
 				<li><strong>Standortdaten:</strong> Ihre aktuelle GPS-Position (nur nach Ihrer ausdrücklichen Einwilligung) zur Nutzung des Umkreis-Filters im Event-Feed.</li>
 				<li><strong>Nutzungsdaten:</strong> Informationen über Ihr Gerät (Gerätetyp, Betriebssystemversion, eindeutige Geräte-ID), IP-Adresse, Datum und Uhrzeit des Zugriffs, innerhalb der App aufgerufene Seiten, Klickverhalten, Favoriten.</li>
 				<li><strong>Zahlungsdaten:</strong> Falls Sie kostenpflichtige Funktionen („Crew Link Pro“) erwerben – Daten wie Kreditkarteninformationen, Rechnungsadresse. Diese werden direkt über einen externen Zahlungsdienstleister (z. B. Stripe, PayPal) abgewickelt; wir speichern nur eine Transaktions-ID und den Zahlungsstatus.</li>
+				<li><strong>Mustervertragsdaten (Vertragsgenerator):</strong> Angaben, die Sie für ein Muster eingeben (Namen und Adressen der Vertragsparteien, Leistungsbeschreibung, Vergütung und der übrige Vertragsinhalt), sowie die daraus erzeugte PDF. Die PDF liegt im Bucket eventify-theapp-contracts. Nur dieser Bucket liegt in der Region europe-west3. Die Funktionen sendContractEmail und expireContracts laufen ebenfalls in europe-west3. Das gilt nicht für den übrigen Firebase-Speicher und nicht für Firestore.</li>
+				<li><strong>Guide-Fortschritt:</strong> im Selbstständigkeits-Guide nur, ob ein Schritt erledigt ist (completed), der Zeitpunkt der Erledigung (completedAt), die Checkliste (checklist) und das gewählte Bundesland (selectedBundeslandCode), gespeichert in Firestore unter Ihrem Konto (users/{uid}/selfEmploymentProgress/{stepId}).</li>
+				<li><strong>Versand einer Mustervertrags-PDF:</strong> die E-Mail-Adresse, die Sie für den Versand eingeben, und der Inhalt der übermittelten PDF. Der Versand nutzt den konfigurierten Mail-Transport.</li>
 			</ul>
 		</section>
 
@@ -97,6 +101,21 @@
 					<tr>
 						<td>Versand von Service-E-Mails (z. B. Bestätigung der E-Mail-Adresse, wichtige Änderungen)</td>
 						<td>Art. 6 Abs. 1 lit. b DSGVO (vertraglich erforderlich)</td>
+					</tr>
+
+					<tr>
+						<td>Bereitstellung des Vertragsgenerators (Erstellung, Speicherung und Anzeige von Musterverträgen und ihrer PDFs)</td>
+						<td>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)</td>
+					</tr>
+
+					<tr>
+						<td>Bereitstellung des Selbstständigkeits-Guides, den Sie nutzen, einschließlich Speicherung Ihres Fortschritts</td>
+						<td>Art. 6 Abs. 1 lit. b DSGVO (Bereitstellung des Guides, den Sie nutzen)</td>
+					</tr>
+
+					<tr>
+						<td>Versand einer Mustervertrags-PDF an die E-Mail-Adresse, die Sie eingeben</td>
+						<td>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)</td>
 					</tr>
 				</tbody>
 			</table>
@@ -147,6 +166,9 @@
 				<li><strong>Equipment-Inserate</strong> bleiben bis zur Löschung durch den Nutzer oder bis zur Kontolöschung sichtbar.</li>
 				<li><strong>Nutzungsdaten (Logs)</strong> werden nach 90 Tagen anonymisiert oder gelöscht.</li>
 				<li><strong>Vertragsdaten</strong> (z. B. über Mietanfragen) unterliegen der steuerlichen Aufbewahrungspflicht (10 Jahre).</li>
+				<li><strong>Mustervertragsdaten und PDFs aus dem Vertragsgenerator</strong> bleiben gespeichert, bis Sie sie löschen.</li>
+				<li><strong>Guide-Fortschritt</strong> (erledigte Schritte, Zeitpunkt, Checkliste, gewähltes Bundesland) bleibt gespeichert, bis Sie die Daten löschen.</li>
+				<li><strong>Angaben zum PDF-Versand</strong> werden für die Übermittlung an die von Ihnen eingegebene Adresse verwendet und darüber hinaus nicht dauerhaft gespeichert.</li>
 			</ul>
 		</section>
 
@@ -210,5 +232,6 @@
 				E-Mail: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a>
 			</p>
 		</section>
+		<p class="document-date secondary"><em>Stand: 26. Oktober 2026</em></p>
 	</div>
 </template>
