@@ -47,6 +47,8 @@ jobs:
           # This makes those two URLs Google Play specifically complains about accessible without 404 (200 instead)
           cp dist/index.html dist/datenschutz.html
           cp dist/index.html dist/daten-loeschen.html
+          cp dist/index.html dist/agb.html
+          cp dist/index.html dist/impressum.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist

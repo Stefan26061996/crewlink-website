@@ -18,7 +18,8 @@
 
 	<div class="main-content max-width">
 		<h1>Allgemeine Geschäftsbedingungen (AGB)</h1>
-		<p class="document-date secondary"><em>Stand: April 2026</em></p>
+		<!-- TODO: Anwalt prüfen -->
+		<p class="secondary">Letzte Aktualisierung: 26. Oktober 2026 – Neue Abschnitte §15–§18 zu Vertragsgenerator und Selbstständigkeits-Guide.</p>
 
 		<section class="text-content">
 			<h2>§1 Geltungsbereich</h2>
@@ -168,5 +169,47 @@
 
 			<p>(4) Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>. Crew Link ist nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 		</section>
+
+		<section class="text-content">
+			<h2>§15 Vertragsgenerator (Muster-Verträge)</h2>
+			<p>(1) Die Dokumente aus dem Vertragsgenerator sind nur Muster. Sie haben keine rechtliche Kraft. Das gilt, bis Crewlink die Muster von einem Rechtsanwalt hat prüfen lassen. Crewlink ist nicht Vertragspartei. Der Nutzer prüft selbst, was er mit der anderen Person verwendet.</p>
+			<p>(2) Der Nutzer ist allein dafür verantwortlich, die generierten Verträge auf ihre rechtliche Wirksamkeit und Vollständigkeit zu prüfen. Crewlink übernimmt keine Haftung für die rechtliche Wirksamkeit, Vollständigkeit oder Durchsetzbarkeit der erstellten Verträge.</p>
+			<p>(3) Crewlink ist nicht an den zwischen Nutzern geschlossenen Verträgen beteiligt. Vertragsverhältnisse kommen ausschließlich zwischen den Nutzern zustande. Crewlink ist weder Vertragspartei noch Vertreter einer Partei.</p>
+			<p>(4) Der Nutzer räumt Crewlink das einfache, nicht übertragbare Recht ein, die von ihm erstellten Vertragsdaten zum Zweck der Speicherung, Anzeige und PDF-Generierung zu verarbeiten. Eine Weitergabe an Dritte erfolgt nur, wenn der Nutzer dies aktiv veranlasst (z. B. Versand an die Gegenpartei).</p>
+			<p>(5) Der Nutzer verpflichtet sich, keine rechtswidrigen, sittenwidrigen oder gegen geltendes Recht verstoßenden Inhalte in die Vertragsvorlagen einzufügen.</p>
+		</section>
+
+		<section class="text-content">
+			<h2>§16 Selbstständigkeits-Guide</h2>
+			<p>(1) Crewlink stellt in der App einen Informations-Guide für Nutzer bereit, die eine selbstständige Tätigkeit aufnehmen möchten. Die Inhalte dienen ausschließlich der allgemeinen Information.</p>
+			<p>(2) Die Inhalte stellen keine Rechts-, Steuer- oder Unternehmensberatung im Sinne des Rechtsdienstleistungsgesetzes (RDG) oder des Steuerberatungsgesetzes (StBerG) dar.</p>
+			<p>(3) Der Nutzer ist verpflichtet, für seine individuelle Situation professionelle Beratung (Rechtsanwalt, Steuerberater, IHK) in Anspruch zu nehmen.</p>
+			<p>(4) Crewlink übernimmt keine Haftung für Entscheidungen, die der Nutzer auf Basis der bereitgestellten Informationen trifft.</p>
+			<p>(5) Die im Guide verlinkten externen Inhalte (z. B. ELSTER, IHK, Künstlersozialkasse) unterliegen der Verantwortung der jeweiligen Anbieter. Crewlink hat keinen Einfluss auf deren Inhalte.</p>
+		</section>
+
+		<section class="text-content">
+			<h2>§17 Widerrufsrecht für digitale Inhalte</h2>
+			<p>Ergänzend zu §9 gilt für digitale Inhalte:</p>
+			<p>(1) Für direkt über Crewlink erworbene digitale Inhalte (z. B. Vertragsvorlagen, Guide-Premium) gilt ein 14-tägiges Widerrufsrecht gemäß § 356 Abs. 5 BGB.</p>
+			<p>(2) Das Widerrufsrecht erlischt, wenn Crewlink mit der Ausführung des Vertrags begonnen hat, nachdem der Nutzer ausdrücklich zugestimmt und seine Kenntnis vom Erlöschen bestätigt hat.</p>
+			<p>(3) Für Käufe über den Apple App Store oder Google Play Store gelten die jeweiligen Widerrufsbestimmungen der Stores. Crewlink ist an diese Käufe nicht beteiligt.</p>
+			<p>(4) Zur Ausübung des Widerrufsrechts genügt eine eindeutige Erklärung an: <a href="mailto:hallo@crewlink.cloud">hallo@crewlink.cloud</a>.</p>
+		</section>
+
+		<section class="text-content">
+			<h2>§18 Haftungsbeschränkung (Ergänzung zu §10)</h2>
+			<p>(1) Ergänzend zu §10 haftet Crewlink nicht für:</p>
+			<ul>
+				<li>die rechtliche Wirksamkeit generierter Verträge</li>
+				<li>Schäden aus der Nutzung des Selbstständigkeits-Guides</li>
+				<li>die Richtigkeit externer Links</li>
+				<li>Streitigkeiten zwischen Nutzern</li>
+			</ul>
+			<p>(2) Die Haftung für Vorsatz und grobe Fahrlässigkeit sowie bei Verletzung von Leben, Körper oder Gesundheit bleibt unberührt.</p>
+			<p>(3) Im Übrigen ist die Haftung auf den vorhersehbaren, vertragstypischen Schaden begrenzt.</p>
+		</section>
+
+		<p class="document-date secondary"><em>Stand: 26. Oktober 2026</em></p>
 	</div>
 </template>
